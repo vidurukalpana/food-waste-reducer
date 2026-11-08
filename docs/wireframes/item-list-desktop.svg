@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" font-family="Arial, Helvetica, sans-serif">
+  <title>Wireframe: Item list (desktop)</title>
+  <rect width="1280" height="800" fill="#ffffff" stroke="#999999"/>
+
+  <!-- Header with navigation -->
+  <rect width="1280" height="64" fill="#eeeeee"/>
+  <text x="80" y="39" font-size="18" font-weight="bold" fill="#222222">Food Waste Reducer</text>
+  <text x="860" y="39" text-anchor="middle" font-size="14" fill="#444444">Dashboard</text>
+  <text x="960" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#222222">Items</text>
+  <rect x="930" y="61" width="60" height="3" fill="#333333"/>
+  <text x="1060" y="39" text-anchor="middle" font-size="14" fill="#444444">Summary</text>
+  <text x="1200" y="39" text-anchor="end" font-size="14" fill="#444444" text-decoration="underline">Log out</text>
+
+  <text x="80" y="124" font-size="26" font-weight="bold" fill="#222222">My items</text>
+  <rect x="1060" y="98" width="140" height="38" rx="4" fill="#333333"/>
+  <text x="1130" y="122" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">+ Add item</text>
+
+  <!-- Table -->
+  <rect x="80" y="156" width="1120" height="268" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="81" y="157" width="1118" height="43" fill="#f5f5f5"/>
+  <text x="104" y="184" font-size="13" font-weight="bold" fill="#444444">Name</text>
+  <text x="380" y="184" font-size="13" font-weight="bold" fill="#444444">Quantity</text>
+  <text x="500" y="184" font-size="13" font-weight="bold" fill="#444444">Category</text>
+  <text x="640" y="184" font-size="13" font-weight="bold" fill="#444444">Expiry date</text>
+  <text x="790" y="184" font-size="13" font-weight="bold" fill="#444444">Status</text>
+  <text x="952" y="184" font-size="13" font-weight="bold" fill="#444444">Actions</text>
+
+  <!-- Row 1 -->
+  <line x1="80" y1="200" x2="1200" y2="200" stroke="#dddddd"/>
+  <text x="104" y="233" font-size="14" font-weight="bold" fill="#222222">Milk</text>
+  <text x="380" y="233" font-size="14" fill="#222222">1 l</text>
+  <text x="500" y="233" font-size="14" fill="#222222">Dairy</text>
+  <text x="640" y="233" font-size="14" fill="#222222">9 Nov 2026</text>
+  <circle cx="796" cy="228" r="6" fill="#d9534f"/>
+  <text x="810" y="233" font-size="13" fill="#a94442">Expired 1 day ago</text>
+  <rect x="952" y="214" width="70" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="987" y="233" text-anchor="middle" font-size="13" fill="#222222">Used</text>
+  <rect x="1030" y="214" width="76" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="1068" y="233" text-anchor="middle" font-size="13" fill="#222222">Wasted</text>
+  <rect x="1114" y="214" width="70" height="28" rx="4" fill="#ffffff" stroke="#a94442"/>
+  <text x="1149" y="233" text-anchor="middle" font-size="13" fill="#a94442">Delete</text>
+
+  <!-- Row 2 -->
+  <line x1="80" y1="256" x2="1200" y2="256" stroke="#dddddd"/>
+  <text x="104" y="289" font-size="14" font-weight="bold" fill="#222222">Chicken breast</text>
+  <text x="380" y="289" font-size="14" fill="#222222">500 g</text>
+  <text x="500" y="289" font-size="14" fill="#222222">Meat</text>
+  <text x="640" y="289" font-size="14" fill="#222222">10 Nov 2026</text>
+  <circle cx="796" cy="284" r="6" fill="#f0ad4e"/>
+  <text x="810" y="289" font-size="13" fill="#8a5a00">Expires today</text>
+  <rect x="952" y="270" width="70" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="987" y="289" text-anchor="middle" font-size="13" fill="#222222">Used</text>
+  <rect x="1030" y="270" width="76" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="1068" y="289" text-anchor="middle" font-size="13" fill="#222222">Wasted</text>
+  <rect x="1114" y="270" width="70" height="28" rx="4" fill="#ffffff" stroke="#a94442"/>
+  <text x="1149" y="289" text-anchor="middle" font-size="13" fill="#a94442">Delete</text>
+
+  <!-- Row 3 -->
+  <line x1="80" y1="312" x2="1200" y2="312" stroke="#dddddd"/>
+  <text x="104" y="345" font-size="14" font-weight="bold" fill="#222222">Yoghurt</text>
+  <text x="380" y="345" font-size="14" fill="#222222">4 pcs</text>
+  <text x="500" y="345" font-size="14" fill="#222222">Dairy</text>
+  <text x="640" y="345" font-size="14" fill="#222222">12 Nov 2026</text>
+  <circle cx="796" cy="340" r="6" fill="#f0ad4e"/>
+  <text x="810" y="345" font-size="13" fill="#8a5a00">2 days left</text>
+  <rect x="952" y="326" width="70" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="987" y="345" text-anchor="middle" font-size="13" fill="#222222">Used</text>
+  <rect x="1030" y="326" width="76" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="1068" y="345" text-anchor="middle" font-size="13" fill="#222222">Wasted</text>
+  <rect x="1114" y="326" width="70" height="28" rx="4" fill="#ffffff" stroke="#a94442"/>
+  <text x="1149" y="345" text-anchor="middle" font-size="13" fill="#a94442">Delete</text>
+
+  <!-- Row 4 -->
+  <line x1="80" y1="368" x2="1200" y2="368" stroke="#dddddd"/>
+  <text x="104" y="401" font-size="14" font-weight="bold" fill="#222222">Rice</text>
+  <text x="380" y="401" font-size="14" fill="#222222">5 kg</text>
+  <text x="500" y="401" font-size="14" fill="#222222">Pantry</text>
+  <text x="640" y="401" font-size="14" fill="#222222">20 Mar 2027</text>
+  <circle cx="796" cy="396" r="6" fill="#5cb85c"/>
+  <text x="810" y="401" font-size="13" fill="#2e6b2e">130 days left</text>
+  <rect x="952" y="382" width="70" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="987" y="401" text-anchor="middle" font-size="13" fill="#222222">Used</text>
+  <rect x="1030" y="382" width="76" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="1068" y="401" text-anchor="middle" font-size="13" fill="#222222">Wasted</text>
+  <rect x="1114" y="382" width="70" height="28" rx="4" fill="#ffffff" stroke="#a94442"/>
+  <text x="1149" y="401" text-anchor="middle" font-size="13" fill="#a94442">Delete</text>
+
+  <text x="80" y="456" font-size="13" fill="#999999">Active items, soonest expiry first. Click a row to edit the item.</text>
+</svg>

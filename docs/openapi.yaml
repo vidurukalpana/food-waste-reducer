@@ -1,0 +1,855 @@
+openapi: 3.1.0
+info:
+  title: Food Waste Reducer API
+  version: 0.1.0
+  license:
+    name: MIT
+    identifier: MIT
+  description: |
+    Draft REST API for Food Waste Reducer.
+
+    - All dates and times use Sri Lanka time (`Asia/Colombo`, UTC+05:30). "Today" means today in Sri Lanka.
+    - Every `/api/**` route needs a JWT `Bearer` token, except register, login and the internal reminder trigger.
+    - Users only see their own items; another user's item returns 404.
+    - Errors use Spring's `ProblemDetail` JSON (`application/problem+json`).
+
+servers:
+  - url: http://localhost:8080
+    description: Local development
+
+tags:
+  - name: Health
+    description: Application status
+  - name: Auth
+    description: Register, log in, current user
+  - name: Items
+    description: Food items, expiry tracking, used / wasted actions
+  - name: Products
+    description: Barcode lookup through Open Food Facts
+  - name: Recipes
+    description: Recipe ideas through TheMealDB
+  - name: Summary
+    description: Monthly used vs wasted counts
+  - name: Settings
+    description: User settings such as the daily email reminder
+  - name: Internal
+    description: Endpoints called by the daily scheduler
+  - name: Docs
+    description: API documentation (dev profile only)
+
+security:
+  - bearerAuth: []
+
+paths:
+  /actuator/health:
+    get:
+      tags: [Health]
+      summary: Health check
+      operationId: health
+      security: []
+      responses:
+        "200":
+          description: Application is up
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+
+  /api/auth/register:
+    post:
+      tags: [Auth]
+      summary: Register a new user
+      description: The email is stored in lowercase. The password is hashed with BCrypt.
+      operationId: register
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "409":
+          description: Email is already registered
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              example:
+                type: about:blank
+                title: Conflict
+                status: 409
+                detail: Email is already registered
+
+  /api/auth/login:
+    post:
+      tags: [Auth]
+      summary: Log in, receive a JWT
+      description: The token is valid for 24 hours.
+      operationId: login
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: Login succeeded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          description: Wrong email or password
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              example:
+                type: about:blank
+                title: Unauthorized
+                status: 401
+                detail: Invalid email or password
+
+  /api/auth/me:
+    get:
+      tags: [Auth]
+      summary: Get the logged-in user
+      operationId: getCurrentUser
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /api/items:
+    get:
+      tags: [Items]
+      summary: List my items
+      description: Sorted by expiry date, soonest first.
+      operationId: listItems
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: "#/components/schemas/ItemStatus"
+          description: Defaults to `ACTIVE`.
+      responses:
+        "200":
+          description: My items with the given status
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ItemResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    post:
+      tags: [Items]
+      summary: Create an item
+      operationId: createItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItemRequest"
+      responses:
+        "201":
+          description: Item created
+          headers:
+            Location:
+              description: URL of the new item
+              schema:
+                type: string
+                example: /api/items/7c9e6679-7425-40de-944b-e07fc1f90ae7
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /api/items/use-soon:
+    get:
+      tags: [Items]
+      summary: List active items expiring soon
+      description: Active items with `expiryDate <= today + days`, including expired ones, sorted by expiry date.
+      operationId: listUseSoonItems
+      parameters:
+        - name: days
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 30
+            default: 7
+      responses:
+        "200":
+          description: Items to use soon
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ItemResponse"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /api/items/{id}:
+    parameters:
+      - $ref: "#/components/parameters/ItemId"
+    get:
+      tags: [Items]
+      summary: Get one of my items
+      operationId: getItem
+      responses:
+        "200":
+          description: The item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/ItemNotFound"
+    put:
+      tags: [Items]
+      summary: Update one of my items
+      operationId: updateItem
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ItemRequest"
+      responses:
+        "200":
+          description: Item updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/ItemNotFound"
+    delete:
+      tags: [Items]
+      summary: Delete one of my items
+      operationId: deleteItem
+      responses:
+        "204":
+          description: Item deleted
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/ItemNotFound"
+
+  /api/items/{id}/used:
+    parameters:
+      - $ref: "#/components/parameters/ItemId"
+    post:
+      tags: [Items]
+      summary: Mark an active item as used
+      description: Sets `status` to `USED` and `closedAt` to now.
+      operationId: markItemUsed
+      responses:
+        "200":
+          description: Item marked as used
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/ItemNotFound"
+        "409":
+          $ref: "#/components/responses/ItemAlreadyClosed"
+
+  /api/items/{id}/wasted:
+    parameters:
+      - $ref: "#/components/parameters/ItemId"
+    post:
+      tags: [Items]
+      summary: Mark an active item as wasted
+      description: Sets `status` to `WASTED` and `closedAt` to now.
+      operationId: markItemWasted
+      responses:
+        "200":
+          description: Item marked as wasted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ItemResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/ItemNotFound"
+        "409":
+          $ref: "#/components/responses/ItemAlreadyClosed"
+
+  /api/products/{barcode}:
+    get:
+      tags: [Products]
+      summary: Look up a product by barcode
+      description: Calls Open Food Facts from the backend; results are cached for 7 days.
+      operationId: getProduct
+      parameters:
+        - name: barcode
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: "^[0-9]{8,14}$"
+          example: "3017620422003"
+      responses:
+        "200":
+          description: Product found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductInfo"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          description: Product not found
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              example:
+                type: about:blank
+                title: Not Found
+                status: 404
+                detail: Product not found
+        "503":
+          $ref: "#/components/responses/ExternalServiceUnavailable"
+
+  /api/recipes:
+    get:
+      tags: [Recipes]
+      summary: Get recipe ideas for an ingredient
+      description: Calls TheMealDB from the backend; returns at most 6 recipes, cached for 1 day. An unknown ingredient returns an empty list.
+      operationId: listRecipes
+      parameters:
+        - name: ingredient
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 40
+          example: chicken
+      responses:
+        "200":
+          description: Up to 6 recipes
+          content:
+            application/json:
+              schema:
+                type: array
+                maxItems: 6
+                items:
+                  $ref: "#/components/schemas/RecipeSummary"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "503":
+          $ref: "#/components/responses/ExternalServiceUnavailable"
+
+  /api/summary:
+    get:
+      tags: [Summary]
+      summary: Get the monthly used vs wasted summary
+      description: Counts items whose `closedAt` falls in the month, using Sri Lanka time for month boundaries.
+      operationId: getMonthlySummary
+      parameters:
+        - name: month
+          in: query
+          required: false
+          description: Format `YYYY-MM`. Defaults to the current month in Sri Lanka.
+          schema:
+            type: string
+            pattern: "^[0-9]{4}-(0[1-9]|1[0-2])$"
+          example: "2026-11"
+      responses:
+        "200":
+          description: Monthly summary
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MonthlySummary"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /api/users/me/settings:
+    get:
+      tags: [Settings]
+      summary: Get my settings
+      operationId: getSettings
+      responses:
+        "200":
+          description: My settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSettings"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+    patch:
+      tags: [Settings]
+      summary: Update my settings
+      operationId: updateSettings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserSettings"
+      responses:
+        "200":
+          description: Settings updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSettings"
+        "400":
+          $ref: "#/components/responses/ValidationError"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /api/internal/reminders/run:
+    post:
+      tags: [Internal]
+      summary: Send today's reminder emails
+      description: |
+        Called daily at 07:00 Sri Lanka time by GitHub Actions. Emails each user with reminders on who has active items
+        expiring within 2 days (including expired ones) and has not been emailed today. Safe to call more than once a day.
+      operationId: runReminders
+      security:
+        - cronSecret: []
+      responses:
+        "200":
+          description: Reminder run finished
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReminderRunResult"
+        "401":
+          description: Missing or wrong `X-Cron-Secret` header
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/ProblemDetail"
+              example:
+                type: about:blank
+                title: Unauthorized
+                status: 401
+                detail: Invalid cron secret
+
+  /swagger-ui.html:
+    get:
+      tags: [Docs]
+      summary: Swagger UI
+      description: Available only in the `dev` profile.
+      operationId: swaggerUi
+      security: []
+      responses:
+        "200":
+          description: Swagger UI page
+          content:
+            text/html:
+              schema:
+                type: string
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    cronSecret:
+      type: apiKey
+      in: header
+      name: X-Cron-Secret
+
+  parameters:
+    ItemId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+
+  responses:
+    ValidationError:
+      description: Invalid request
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ValidationProblemDetail"
+          example:
+            type: about:blank
+            title: Bad Request
+            status: 400
+            detail: Validation failed
+            errors:
+              name: Name is required
+              quantity: Quantity must be greater than 0
+    Unauthorized:
+      description: Missing, invalid or expired JWT
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetail"
+          example:
+            type: about:blank
+            title: Unauthorized
+            status: 401
+            detail: Authentication required
+    ItemNotFound:
+      description: Item does not exist or belongs to another user
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetail"
+          example:
+            type: about:blank
+            title: Not Found
+            status: 404
+            detail: Item not found
+    ItemAlreadyClosed:
+      description: Item is not `ACTIVE`
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetail"
+          example:
+            type: about:blank
+            title: Conflict
+            status: 409
+            detail: Item is already closed
+    ExternalServiceUnavailable:
+      description: The external API failed or timed out
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/ProblemDetail"
+          example:
+            type: about:blank
+            title: Service Unavailable
+            status: 503
+            detail: External service is unavailable, try again later
+
+  schemas:
+    Health:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          example: UP
+
+    RegisterRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 255
+          example: amal@example.com
+        password:
+          type: string
+          minLength: 8
+          example: strongPass123
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email:
+          type: string
+          format: email
+          example: amal@example.com
+        password:
+          type: string
+          example: strongPass123
+
+    LoginResponse:
+      type: object
+      required: [token]
+      properties:
+        token:
+          type: string
+          description: JWT (HS256), valid for 24 hours
+          example: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI...
+
+    UserResponse:
+      type: object
+      required: [id, email]
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        email:
+          type: string
+          format: email
+          example: amal@example.com
+
+    Category:
+      type: string
+      enum: [DAIRY, MEAT, SEAFOOD, VEGETABLES, FRUITS, BAKERY, PANTRY, FROZEN, OTHER]
+
+    ItemStatus:
+      type: string
+      enum: [ACTIVE, USED, WASTED]
+
+    ExpiryStatus:
+      type: string
+      description: |
+        `days` = expiry date − today.
+        `EXPIRED` days < 0 (red), `URGENT` 0–2 (orange), `SOON` 3–7 (yellow), `FRESH` > 7 (green).
+      enum: [EXPIRED, URGENT, SOON, FRESH]
+
+    ItemRequest:
+      type: object
+      required: [name, category, quantity, unit, expiryDate]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+          example: Milk
+        category:
+          $ref: "#/components/schemas/Category"
+        quantity:
+          type: number
+          exclusiveMinimum: 0
+          example: 1
+        unit:
+          type: string
+          minLength: 1
+          maxLength: 20
+          example: l
+        expiryDate:
+          type: string
+          format: date
+          example: "2026-11-12"
+        barcode:
+          type: [string, "null"]
+          pattern: "^[0-9]{8,14}$"
+          example: "3017620422003"
+
+    ItemResponse:
+      type: object
+      required: [id, name, category, quantity, unit, expiryDate, status, expiryStatus, daysLeft, createdAt, updatedAt]
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 7c9e6679-7425-40de-944b-e07fc1f90ae7
+        name:
+          type: string
+          example: Milk
+        barcode:
+          type: [string, "null"]
+          example: null
+        category:
+          $ref: "#/components/schemas/Category"
+        quantity:
+          type: number
+          example: 1
+        unit:
+          type: string
+          example: l
+        expiryDate:
+          type: string
+          format: date
+          example: "2026-11-12"
+        status:
+          $ref: "#/components/schemas/ItemStatus"
+        expiryStatus:
+          $ref: "#/components/schemas/ExpiryStatus"
+        daysLeft:
+          type: integer
+          description: Expiry date − today; negative when expired
+          example: 2
+        createdAt:
+          type: string
+          format: date-time
+          example: "2026-11-10T08:15:00+05:30"
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2026-11-10T08:15:00+05:30"
+        closedAt:
+          type: [string, "null"]
+          format: date-time
+          description: Set when the item is marked used or wasted
+          example: null
+
+    ProductInfo:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+          example: Nutella
+        brand:
+          type: [string, "null"]
+          example: Ferrero
+        suggestedCategory:
+          oneOf:
+            - $ref: "#/components/schemas/Category"
+            - type: "null"
+          example: PANTRY
+
+    RecipeSummary:
+      type: object
+      required: [id, name, thumbnailUrl, sourceUrl]
+      properties:
+        id:
+          type: string
+          example: "52795"
+        name:
+          type: string
+          example: Chicken Handi
+        thumbnailUrl:
+          type: string
+          format: uri
+          example: https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg
+        sourceUrl:
+          type: string
+          format: uri
+          example: https://www.themealdb.com/meal/52795
+
+    MonthlySummary:
+      type: object
+      required: [month, used, wasted, wasteRate, categories]
+      properties:
+        month:
+          type: string
+          example: "2026-11"
+        used:
+          type: integer
+          minimum: 0
+          example: 6
+        wasted:
+          type: integer
+          minimum: 0
+          example: 2
+        wasteRate:
+          type: number
+          minimum: 0
+          maximum: 100
+          description: wasted ÷ (used + wasted) × 100; 0 when nothing was closed
+          example: 25.0
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategorySummary"
+
+    CategorySummary:
+      type: object
+      required: [category, used, wasted]
+      properties:
+        category:
+          $ref: "#/components/schemas/Category"
+        used:
+          type: integer
+          minimum: 0
+          example: 3
+        wasted:
+          type: integer
+          minimum: 0
+          example: 1
+
+    UserSettings:
+      type: object
+      required: [reminderEnabled]
+      properties:
+        reminderEnabled:
+          type: boolean
+          example: true
+
+    ReminderRunResult:
+      type: object
+      required: [checked, emailed]
+      properties:
+        checked:
+          type: integer
+          minimum: 0
+          description: Users checked
+          example: 12
+        emailed:
+          type: integer
+          minimum: 0
+          description: Users emailed
+          example: 4
+
+    ProblemDetail:
+      type: object
+      required: [type, title, status]
+      properties:
+        type:
+          type: string
+          example: about:blank
+        title:
+          type: string
+          example: Not Found
+        status:
+          type: integer
+          example: 404
+        detail:
+          type: string
+          example: Item not found
+        instance:
+          type: string
+          example: /api/items/7c9e6679-7425-40de-944b-e07fc1f90ae7
+
+    ValidationProblemDetail:
+      allOf:
+        - $ref: "#/components/schemas/ProblemDetail"
+        - type: object
+          properties:
+            errors:
+              type: object
+              description: Field name → error message
+              additionalProperties:
+                type: string

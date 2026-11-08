@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" font-family="Arial, Helvetica, sans-serif">
+  <title>Wireframe: Monthly summary (desktop)</title>
+  <rect width="1280" height="800" fill="#ffffff" stroke="#999999"/>
+
+  <!-- Header with navigation -->
+  <rect width="1280" height="64" fill="#eeeeee"/>
+  <text x="80" y="39" font-size="18" font-weight="bold" fill="#222222">Food Waste Reducer</text>
+  <text x="860" y="39" text-anchor="middle" font-size="14" fill="#444444">Dashboard</text>
+  <text x="960" y="39" text-anchor="middle" font-size="14" fill="#444444">Items</text>
+  <text x="1060" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#222222">Summary</text>
+  <rect x="1022" y="61" width="76" height="3" fill="#333333"/>
+  <text x="1200" y="39" text-anchor="end" font-size="14" fill="#444444" text-decoration="underline">Log out</text>
+
+  <!-- Centred content, 800 px wide -->
+  <text x="240" y="124" font-size="26" font-weight="bold" fill="#222222">Monthly summary</text>
+  <rect x="760" y="98" width="280" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
+  <text x="782" y="124" text-anchor="middle" font-size="18" fill="#444444">‹</text>
+  <text x="900" y="123" text-anchor="middle" font-size="15" font-weight="bold" fill="#222222">November 2026</text>
+  <text x="1018" y="124" text-anchor="middle" font-size="18" fill="#444444">›</text>
+
+  <!-- Three stat cards -->
+  <rect x="240" y="164" width="256" height="104" rx="6" fill="#ffffff" stroke="#999999"/>
+  <text x="264" y="214" font-size="34" font-weight="bold" fill="#222222">6</text>
+  <text x="264" y="246" font-size="14" fill="#444444">Used</text>
+
+  <rect x="512" y="164" width="256" height="104" rx="6" fill="#ffffff" stroke="#999999"/>
+  <text x="536" y="214" font-size="34" font-weight="bold" fill="#222222">2</text>
+  <text x="536" y="246" font-size="14" fill="#444444">Wasted</text>
+
+  <rect x="784" y="164" width="256" height="104" rx="6" fill="#ffffff" stroke="#999999"/>
+  <text x="808" y="214" font-size="34" font-weight="bold" fill="#222222">25%</text>
+  <text x="808" y="236" font-size="14" fill="#444444">Waste rate</text>
+  <rect x="808" y="246" width="208" height="10" rx="5" fill="#e5e5e5"/>
+  <rect x="808" y="246" width="52" height="10" rx="5" fill="#555555"/>
+
+  <!-- By category -->
+  <text x="240" y="320" font-size="17" font-weight="bold" fill="#222222">By category</text>
+  <rect x="900" y="309" width="12" height="12" fill="#555555"/>
+  <text x="918" y="320" font-size="13" fill="#444444">Used</text>
+  <rect x="966" y="309" width="12" height="12" fill="#bbbbbb"/>
+  <text x="984" y="320" font-size="13" fill="#444444">Wasted</text>
+
+  <line x1="240" y1="340" x2="1040" y2="340" stroke="#dddddd"/>
+  <text x="240" y="372" font-size="14" fill="#222222">Dairy</text>
+  <rect x="400" y="360" width="240" height="16" fill="#555555"/>
+  <rect x="640" y="360" width="80" height="16" fill="#bbbbbb"/>
+  <text x="1040" y="373" text-anchor="end" font-size="13" fill="#666666">3 used · 1 wasted</text>
+
+  <line x1="240" y1="392" x2="1040" y2="392" stroke="#dddddd"/>
+  <text x="240" y="424" font-size="14" fill="#222222">Vegetables</text>
+  <rect x="400" y="412" width="160" height="16" fill="#555555"/>
+  <rect x="560" y="412" width="80" height="16" fill="#bbbbbb"/>
+  <text x="1040" y="425" text-anchor="end" font-size="13" fill="#666666">2 used · 1 wasted</text>
+
+  <line x1="240" y1="444" x2="1040" y2="444" stroke="#dddddd"/>
+  <text x="240" y="476" font-size="14" fill="#222222">Meat</text>
+  <rect x="400" y="464" width="80" height="16" fill="#555555"/>
+  <text x="1040" y="477" text-anchor="end" font-size="13" fill="#666666">1 used · 0 wasted</text>
+
+  <text x="240" y="532" font-size="12" fill="#999999">Counts items closed in the month (Sri Lanka time).</text>
+</svg>

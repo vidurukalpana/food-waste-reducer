@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" font-family="Arial, Helvetica, sans-serif">
+  <title>Wireframe: Use soon dashboard (desktop)</title>
+  <rect width="1280" height="800" fill="#ffffff" stroke="#999999"/>
+
+  <!-- Header with navigation -->
+  <rect width="1280" height="64" fill="#eeeeee"/>
+  <text x="80" y="39" font-size="18" font-weight="bold" fill="#222222">Food Waste Reducer</text>
+  <text x="860" y="39" text-anchor="middle" font-size="14" font-weight="bold" fill="#222222">Dashboard</text>
+  <rect x="820" y="61" width="80" height="3" fill="#333333"/>
+  <text x="960" y="39" text-anchor="middle" font-size="14" fill="#444444">Items</text>
+  <text x="1060" y="39" text-anchor="middle" font-size="14" fill="#444444">Summary</text>
+  <text x="1200" y="39" text-anchor="end" font-size="14" fill="#444444" text-decoration="underline">Log out</text>
+
+  <text x="80" y="124" font-size="26" font-weight="bold" fill="#222222">Use soon</text>
+  <rect x="1060" y="98" width="140" height="38" rx="4" fill="#333333"/>
+  <text x="1130" y="122" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">+ Add item</text>
+
+  <!-- Count tiles -->
+  <rect x="80" y="156" width="268" height="80" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="80" y="156" width="268" height="6" fill="#d9534f"/>
+  <text x="104" y="210" font-size="30" font-weight="bold" fill="#222222">1</text>
+  <text x="140" y="208" font-size="15" fill="#444444">Expired</text>
+
+  <rect x="364" y="156" width="268" height="80" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="364" y="156" width="268" height="6" fill="#f0ad4e"/>
+  <text x="388" y="210" font-size="30" font-weight="bold" fill="#222222">2</text>
+  <text x="424" y="208" font-size="15" fill="#444444">Urgent</text>
+
+  <rect x="648" y="156" width="268" height="80" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="648" y="156" width="268" height="6" fill="#f7dc6f"/>
+  <text x="672" y="210" font-size="30" font-weight="bold" fill="#222222">1</text>
+  <text x="708" y="208" font-size="15" fill="#444444">Soon</text>
+
+  <rect x="932" y="156" width="268" height="80" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="932" y="156" width="268" height="6" fill="#5cb85c"/>
+  <text x="956" y="210" font-size="30" font-weight="bold" fill="#222222">8</text>
+  <text x="992" y="208" font-size="15" fill="#444444">Fresh</text>
+
+  <text x="80" y="276" font-size="15" fill="#666666">Next 7 days</text>
+
+  <!-- Card grid: 3 columns -->
+  <rect x="80" y="292" width="360" height="104" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="80" y="292" width="6" height="104" fill="#d9534f"/>
+  <text x="102" y="322" font-size="16" font-weight="bold" fill="#222222">Milk</text>
+  <text x="102" y="344" font-size="13" fill="#666666">1 l · Expires 9 Nov 2026</text>
+  <text x="102" y="378" font-size="14" font-weight="bold" fill="#a94442">Expired 1 day ago</text>
+  <rect x="312" y="358" width="112" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="368" y="377" text-anchor="middle" font-size="13" fill="#222222">Recipe ideas</text>
+
+  <rect x="460" y="292" width="360" height="104" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="460" y="292" width="6" height="104" fill="#f0ad4e"/>
+  <text x="482" y="322" font-size="16" font-weight="bold" fill="#222222">Chicken breast</text>
+  <text x="482" y="344" font-size="13" fill="#666666">500 g · Expires 10 Nov 2026</text>
+  <text x="482" y="378" font-size="14" font-weight="bold" fill="#8a5a00">Expires today</text>
+  <rect x="692" y="358" width="112" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="748" y="377" text-anchor="middle" font-size="13" fill="#222222">Recipe ideas</text>
+
+  <rect x="840" y="292" width="360" height="104" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="840" y="292" width="6" height="104" fill="#f0ad4e"/>
+  <text x="862" y="322" font-size="16" font-weight="bold" fill="#222222">Yoghurt</text>
+  <text x="862" y="344" font-size="13" fill="#666666">4 pcs · Expires 12 Nov 2026</text>
+  <text x="862" y="378" font-size="14" font-weight="bold" fill="#8a5a00">2 days left</text>
+  <rect x="1072" y="358" width="112" height="28" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="1128" y="377" text-anchor="middle" font-size="13" fill="#222222">Recipe ideas</text>
+
+  <rect x="80" y="416" width="360" height="104" rx="6" fill="#ffffff" stroke="#999999"/>
+  <rect x="80" y="416" width="6" height="104" fill="#f7dc6f"/>
+  <text x="102" y="446" font-size="16" font-weight="bold" fill="#222222">Carrots</text>
+  <text x="102" y="468" font-size="13" fill="#666666">1 kg · Expires 15 Nov 2026</text>
+  <text x="102" y="502" font-size="14" font-weight="bold" fill="#7a6a00">5 days left</text>
+</svg>
