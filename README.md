@@ -35,3 +35,7 @@ Food Waste Reducer tracks the food in your kitchen, warns you before it expires,
 | Testing | JUnit 5, Mockito, AssertJ, Testcontainers, Vitest, React Testing Library, Playwright |
 | DevOps | Git, GitHub, Docker, Docker Compose, GitHub Actions |
 | Hosting | Vercel (frontend), Render (backend), Neon (database) |
+
+## Architecture
+
+![Food Waste Reducer high-level architecture](docs/architecture-food-waste-reducer.png)
