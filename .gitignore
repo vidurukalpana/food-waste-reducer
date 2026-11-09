@@ -1,3 +1,16 @@
+# Private guides
 docs/dev/
+
+# Secrets
+.env
+
+# Build output
+target/
+dist/
+node_modules/
+
+# IDE / OS files
+.idea/
+.vscode/
+*.iml
 .DS_Store
-docs/.DS_Store

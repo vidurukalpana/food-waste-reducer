@@ -1,4 +1,4 @@
-// Empty in local development: Vite proxies /api, /actuator to the backend.
+// Empty in development. Vite proxies API calls to the backend.
 const API_URL = import.meta.env.VITE_API_URL ?? ''
 
 export class ApiError extends Error {

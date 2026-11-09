@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: food-waste-reducer
+  config:
+    # Loads the project-root .env for local runs. Optional on servers.
+    import: "optional:file:../.env[.properties],optional:file:.env[.properties]"
   datasource:
     url: ${DB_URL}
     username: ${DB_USER}

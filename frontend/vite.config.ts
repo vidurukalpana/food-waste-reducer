@@ -8,7 +8,7 @@ const backendUrl = 'http://localhost:8080'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
-    // Same-origin calls in development, so the browser needs no CORS setup.
+    // Forwards API calls to the backend in development. No CORS needed locally.
     proxy: {
       '/api': backendUrl,
       '/actuator': backendUrl,

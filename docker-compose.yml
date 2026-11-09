@@ -11,10 +11,10 @@ services:
       TZ: Asia/Colombo
       PGTZ: Asia/Colombo
     ports:
-      # Host port 5435 avoids a local PostgreSQL on 5432; reachable from this Mac only.
+      # Host port 5435. Port 5432 is used by a local PostgreSQL.
       - "127.0.0.1:5435:5432"
     volumes:
-      # PostgreSQL 18 images keep data under /var/lib/postgresql/<version>.
+      # Data path for PostgreSQL 18 images.
       - postgres-data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]

@@ -4,7 +4,7 @@ import { apiFetch } from '../api/client'
 
 type Health = { status: string }
 
-// The free Render server sleeps when idle; a slow first reply means it is starting up.
+// A slow first reply means the server is waking up.
 const WAKING_DELAY_MS = 3000
 
 export function ApiStatus() {
