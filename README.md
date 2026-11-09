@@ -29,7 +29,7 @@ Food Waste Reducer tracks the food in your kitchen, warns you before it expires,
 | Layer | Technologies |
 | --- | --- |
 | Frontend | React, TypeScript, Vite, React Router, TanStack Query, React Hook Form, Zod, Tailwind CSS, @zxing/browser |
-| Backend | Java 25, Spring Boot 4, Spring Web, Spring Data JPA, Spring Security (JWT), Bean Validation, Flyway, Spring Cache + Caffeine, Actuator, Maven |
+| Backend | Java 17, Spring Boot 4, Spring Web, Spring Data JPA, Spring Security (JWT), Bean Validation, Flyway, Spring Cache + Caffeine, Actuator, Maven |
 | Database | PostgreSQL |
 | External APIs | Open Food Facts (barcodes), TheMealDB (recipes), Brevo (email) |
 | Testing | JUnit 5, Mockito, AssertJ, Testcontainers, Vitest, React Testing Library, Playwright |

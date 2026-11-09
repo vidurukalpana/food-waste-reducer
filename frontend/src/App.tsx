@@ -1,0 +1,49 @@
+import { Navigate, NavLink, Route, Routes } from 'react-router'
+import { ApiStatus } from './components/ApiStatus'
+import { DashboardPage } from './pages/DashboardPage'
+import { ItemDetailPage } from './pages/ItemDetailPage'
+import { ItemsPage } from './pages/ItemsPage'
+import { LoginPage } from './pages/LoginPage'
+import { RegisterPage } from './pages/RegisterPage'
+import { SummaryPage } from './pages/SummaryPage'
+
+const navLinks = [
+  { to: '/dashboard', label: 'Dashboard' },
+  { to: '/items', label: 'Items' },
+  { to: '/summary', label: 'Summary' },
+]
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-white text-gray-900">
+      <header className="flex flex-wrap items-center justify-between gap-2 bg-gray-100 px-4 py-3">
+        <span className="font-bold">Food Waste Reducer</span>
+        <nav className="flex gap-4 text-sm">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              className={({ isActive }) => (isActive ? 'font-semibold underline' : '')}
+            >
+              {link.label}
+            </NavLink>
+          ))}
+        </nav>
+        <ApiStatus />
+      </header>
+
+      <main className="mx-auto max-w-5xl p-4">
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/items" element={<ItemsPage />} />
+          <Route path="/items/:id" element={<ItemDetailPage />} />
+          <Route path="/summary" element={<SummaryPage />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </main>
+    </div>
+  )
+}
