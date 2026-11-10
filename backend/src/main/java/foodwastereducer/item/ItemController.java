@@ -56,6 +56,16 @@ public class ItemController {
     return itemService.update(CurrentUser.id(jwt), id, request);
   }
 
+  @PostMapping("/{id}/used")
+  public ItemResponse markUsed(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {
+    return itemService.markUsed(CurrentUser.id(jwt), id);
+  }
+
+  @PostMapping("/{id}/wasted")
+  public ItemResponse markWasted(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {
+    return itemService.markWasted(CurrentUser.id(jwt), id);
+  }
+
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@AuthenticationPrincipal Jwt jwt, @PathVariable UUID id) {

@@ -1,5 +1,6 @@
 package foodwastereducer.item;
 
+import foodwastereducer.common.ConflictException;
 import foodwastereducer.common.NotFoundException;
 import foodwastereducer.user.User;
 import foodwastereducer.user.UserRepository;
@@ -68,6 +69,25 @@ public class ItemService {
   @Transactional
   public void delete(UUID ownerId, UUID itemId) {
     itemRepository.delete(findOwnedItem(ownerId, itemId));
+  }
+
+  @Transactional
+  public ItemResponse markUsed(UUID ownerId, UUID itemId) {
+    return close(ownerId, itemId, ItemStatus.USED);
+  }
+
+  @Transactional
+  public ItemResponse markWasted(UUID ownerId, UUID itemId) {
+    return close(ownerId, itemId, ItemStatus.WASTED);
+  }
+
+  private ItemResponse close(UUID ownerId, UUID itemId, ItemStatus finalStatus) {
+    Item item = findOwnedItem(ownerId, itemId);
+    if (!item.isActive()) {
+      throw new ConflictException("Item is already closed");
+    }
+    item.close(finalStatus, clock.instant());
+    return ItemResponse.from(item);
   }
 
   // Another user's item looks the same as a missing one: 404.
