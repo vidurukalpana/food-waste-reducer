@@ -1,6 +1,7 @@
 package com.vidurukalpana.foodwastereducer.auth;
 
 import com.vidurukalpana.foodwastereducer.common.ConflictException;
+import com.vidurukalpana.foodwastereducer.common.UnauthorizedException;
 import com.vidurukalpana.foodwastereducer.user.User;
 import com.vidurukalpana.foodwastereducer.user.UserRepository;
 import java.time.Clock;
@@ -14,20 +15,27 @@ import org.springframework.transaction.annotation.Transactional;
 public class AuthService {
 
   private static final String EMAIL_TAKEN = "Email is already registered";
+  private static final String INVALID_CREDENTIALS = "Invalid email or password";
 
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
+  private final JwtService jwtService;
   private final Clock clock;
 
-  public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, Clock clock) {
+  public AuthService(
+      UserRepository userRepository,
+      PasswordEncoder passwordEncoder,
+      JwtService jwtService,
+      Clock clock) {
     this.userRepository = userRepository;
     this.passwordEncoder = passwordEncoder;
+    this.jwtService = jwtService;
     this.clock = clock;
   }
 
   @Transactional
   public UserResponse register(RegisterRequest request) {
-    String email = request.email().trim().toLowerCase(Locale.ROOT);
+    String email = normalizeEmail(request.email());
     if (userRepository.existsByEmailIgnoreCase(email)) {
       throw new ConflictException(EMAIL_TAKEN);
     }
@@ -40,5 +48,20 @@ public class AuthService {
     } catch (DataIntegrityViolationException ex) {
       throw new ConflictException(EMAIL_TAKEN);
     }
+  }
+
+  // Same message for an unknown email or a wrong password. Attackers cannot tell which one failed.
+  @Transactional(readOnly = true)
+  public LoginResponse login(LoginRequest request) {
+    User user =
+        userRepository
+            .findByEmailIgnoreCase(normalizeEmail(request.email()))
+            .filter(found -> passwordEncoder.matches(request.password(), found.getPasswordHash()))
+            .orElseThrow(() -> new UnauthorizedException(INVALID_CREDENTIALS));
+    return new LoginResponse(jwtService.issueToken(user));
+  }
+
+  private static String normalizeEmail(String email) {
+    return email.trim().toLowerCase(Locale.ROOT);
   }
 }

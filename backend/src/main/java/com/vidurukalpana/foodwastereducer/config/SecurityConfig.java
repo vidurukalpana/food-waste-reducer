@@ -20,7 +20,7 @@ public class SecurityConfig {
         auth ->
             auth.requestMatchers("/actuator/health")
                 .permitAll()
-                .requestMatchers(HttpMethod.POST, "/api/auth/register")
+                .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated());
