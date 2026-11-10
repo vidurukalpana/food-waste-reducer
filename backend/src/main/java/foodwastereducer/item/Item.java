@@ -84,6 +84,34 @@ public class Item {
     this.updatedAt = createdAt;
   }
 
+  public void update(
+      String name,
+      String barcode,
+      Category category,
+      BigDecimal quantity,
+      String unit,
+      LocalDate expiryDate,
+      Instant updatedAt) {
+    this.name = name;
+    this.barcode = barcode;
+    this.category = category;
+    this.quantity = quantity;
+    this.unit = unit;
+    this.expiryDate = expiryDate;
+    this.updatedAt = updatedAt;
+  }
+
+  public boolean isActive() {
+    return status == ItemStatus.ACTIVE;
+  }
+
+  // Marks the item USED or WASTED.
+  public void close(ItemStatus finalStatus, Instant closedAt) {
+    this.status = finalStatus;
+    this.closedAt = closedAt;
+    this.updatedAt = closedAt;
+  }
+
   public UUID getId() {
     return id;
   }
