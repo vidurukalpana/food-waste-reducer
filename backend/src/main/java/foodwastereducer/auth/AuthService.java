@@ -6,6 +6,7 @@ import foodwastereducer.user.User;
 import foodwastereducer.user.UserRepository;
 import java.time.Clock;
 import java.util.Locale;
+import java.util.UUID;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class AuthService {
 
   private static final String EMAIL_TAKEN = "Email is already registered";
   private static final String INVALID_CREDENTIALS = "Invalid email or password";
+  private static final String AUTHENTICATION_REQUIRED = "Authentication required";
 
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
@@ -59,6 +61,15 @@ public class AuthService {
             .filter(found -> passwordEncoder.matches(request.password(), found.getPasswordHash()))
             .orElseThrow(() -> new UnauthorizedException(INVALID_CREDENTIALS));
     return new LoginResponse(jwtService.issueToken(user));
+  }
+
+  // A valid token for a deleted user is treated as not logged in.
+  @Transactional(readOnly = true)
+  public UserResponse currentUser(UUID userId) {
+    return userRepository
+        .findById(userId)
+        .map(user -> new UserResponse(user.getId(), user.getEmail()))
+        .orElseThrow(() -> new UnauthorizedException(AUTHENTICATION_REQUIRED));
   }
 
   private static String normalizeEmail(String email) {
