@@ -84,6 +84,23 @@ public class Item {
     this.updatedAt = createdAt;
   }
 
+  public void update(
+      String name,
+      String barcode,
+      Category category,
+      BigDecimal quantity,
+      String unit,
+      LocalDate expiryDate,
+      Instant updatedAt) {
+    this.name = name;
+    this.barcode = barcode;
+    this.category = category;
+    this.quantity = quantity;
+    this.unit = unit;
+    this.expiryDate = expiryDate;
+    this.updatedAt = updatedAt;
+  }
+
   public UUID getId() {
     return id;
   }
