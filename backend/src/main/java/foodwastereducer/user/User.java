@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.user;
+package foodwastereducer.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

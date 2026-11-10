@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer;
+package foodwastereducer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

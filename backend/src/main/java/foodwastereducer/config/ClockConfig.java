@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.config;
+package foodwastereducer.config;
 
 import java.time.Clock;
 import java.time.ZoneId;

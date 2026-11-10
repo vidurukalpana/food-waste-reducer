@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.item;
+package foodwastereducer.item;
 
 import java.time.LocalDate;
 import java.util.List;

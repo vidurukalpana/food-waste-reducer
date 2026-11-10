@@ -8,7 +8,7 @@
 		<version>4.1.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.vidurukalpana</groupId>
+	<groupId>foodwastereducer</groupId>
 	<artifactId>food-waste-reducer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>food-waste-reducer</name>
