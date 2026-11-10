@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.auth;
+package foodwastereducer.auth;
 
 import java.util.UUID;
 

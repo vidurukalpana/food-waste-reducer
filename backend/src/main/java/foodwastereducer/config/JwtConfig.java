@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.config;
+package foodwastereducer.config;
 
 import java.nio.charset.StandardCharsets;
 import javax.crypto.SecretKey;

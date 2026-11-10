@@ -1,6 +1,6 @@
-package com.vidurukalpana.foodwastereducer.auth;
+package foodwastereducer.auth;
 
-import com.vidurukalpana.foodwastereducer.user.User;
+import foodwastereducer.user.User;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;

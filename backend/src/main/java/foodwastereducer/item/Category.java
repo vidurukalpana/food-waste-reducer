@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.item;
+package foodwastereducer.item;
 
 public enum Category {
   DAIRY,

@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.common;
+package foodwastereducer.common;
 
 public class ConflictException extends RuntimeException {
 

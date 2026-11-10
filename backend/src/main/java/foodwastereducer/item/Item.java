@@ -1,6 +1,6 @@
-package com.vidurukalpana.foodwastereducer.item;
+package foodwastereducer.item;
 
-import com.vidurukalpana.foodwastereducer.user.User;
+import foodwastereducer.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

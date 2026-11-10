@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.common;
+package foodwastereducer.common;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

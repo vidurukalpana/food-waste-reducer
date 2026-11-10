@@ -1,9 +1,9 @@
-package com.vidurukalpana.foodwastereducer.auth;
+package foodwastereducer.auth;
 
-import com.vidurukalpana.foodwastereducer.common.ConflictException;
-import com.vidurukalpana.foodwastereducer.common.UnauthorizedException;
-import com.vidurukalpana.foodwastereducer.user.User;
-import com.vidurukalpana.foodwastereducer.user.UserRepository;
+import foodwastereducer.common.ConflictException;
+import foodwastereducer.common.UnauthorizedException;
+import foodwastereducer.user.User;
+import foodwastereducer.user.UserRepository;
 import java.time.Clock;
 import java.util.Locale;
 import org.springframework.dao.DataIntegrityViolationException;

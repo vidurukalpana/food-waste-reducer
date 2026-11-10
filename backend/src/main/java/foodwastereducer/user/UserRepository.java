@@ -1,4 +1,4 @@
-package com.vidurukalpana.foodwastereducer.user;
+package foodwastereducer.user;
 
 import java.util.Optional;
 import java.util.UUID;
