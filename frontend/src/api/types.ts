@@ -17,6 +17,26 @@ export type LoginResponse = {
   token: string
 }
 
+export type Category =
+  'DAIRY' | 'MEAT' | 'SEAFOOD' | 'VEGETABLES' | 'FRUITS' | 'BAKERY' | 'PANTRY' | 'FROZEN' | 'OTHER'
+
+export type ItemStatus = 'ACTIVE' | 'USED' | 'WASTED'
+
+export type ItemResponse = {
+  id: string
+  name: string
+  barcode: string | null
+  category: Category
+  quantity: number
+  unit: string
+  // Date only, e.g. "2026-11-12".
+  expiryDate: string
+  status: ItemStatus
+  createdAt: string
+  updatedAt: string
+  closedAt: string | null
+}
+
 export type ProblemDetail = {
   type?: string
   title: string
