@@ -1,4 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { Link } from 'react-router'
 import { deleteItem, itemsQueryKey, listItems, markItemUsed, markItemWasted } from '../api/items'
 import type { ItemResponse } from '../api/types'
 import { ItemCard } from '../components/ItemCard'
@@ -40,7 +41,15 @@ export function ItemsPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold">My items</h1>
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <h1 className="text-2xl font-bold">My items</h1>
+        <Link
+          to="/items/new"
+          className="rounded bg-gray-800 px-4 py-2 text-sm font-semibold text-white"
+        >
+          + Add item
+        </Link>
+      </div>
 
       {actionError && (
         <p role="alert" className="mb-4 rounded border border-red-500 bg-red-50 p-3 text-sm">

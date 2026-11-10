@@ -37,6 +37,15 @@ export type ItemResponse = {
   closedAt: string | null
 }
 
+export type ItemRequest = {
+  name: string
+  category: Category
+  quantity: number
+  unit: string
+  expiryDate: string
+  barcode: string | null
+}
+
 export type ProblemDetail = {
   type?: string
   title: string
