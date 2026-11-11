@@ -6,6 +6,9 @@ import { apiFetch } from '../api/client'
 import { applyServerErrors } from '../api/formErrors'
 import type { UserResponse } from '../api/types'
 import { useAuth } from '../auth/useAuth'
+import { Alert } from '../components/Alert'
+import { AuthLayout } from '../components/AuthLayout'
+import { primaryButton } from '../components/styles'
 import { TextField } from '../components/TextField'
 
 const PASSWORD_LENGTH = 'Password must be 8 to 72 characters'
@@ -50,14 +53,8 @@ export function RegisterPage() {
   }
 
   return (
-    <div className="mx-auto max-w-sm">
-      <h1 className="mb-4 text-2xl font-bold">Register</h1>
-
-      {errors.root?.server && (
-        <p role="alert" className="mb-4 rounded border border-red-500 bg-red-50 p-3 text-sm">
-          {errors.root.server.message}
-        </p>
-      )}
+    <AuthLayout title="Create an account" subtitle="Start tracking the food in your kitchen.">
+      {errors.root?.server && <Alert className="mb-4">{errors.root.server.message}</Alert>}
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-4">
         <TextField
@@ -71,24 +68,25 @@ export function RegisterPage() {
           label="Password"
           type="password"
           autoComplete="new-password"
+          placeholder="At least 8 characters"
           error={errors.password?.message}
           {...register('password')}
         />
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded bg-gray-800 px-4 py-2 font-semibold text-white disabled:opacity-60"
+          className={`${primaryButton} mt-2 w-full py-3`}
         >
           {isSubmitting ? 'Creating account…' : 'Create account'}
         </button>
       </form>
 
-      <p className="mt-4 text-center text-sm">
+      <p className="mt-6 text-center text-sm text-forest/70">
         Have an account?{' '}
-        <Link to="/login" className="font-semibold underline">
+        <Link to="/login" className="font-semibold text-ochre hover:underline">
           Log in
         </Link>
       </p>
-    </div>
+    </AuthLayout>
   )
 }

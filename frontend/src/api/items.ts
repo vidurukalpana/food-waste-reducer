@@ -7,8 +7,17 @@ export function itemQueryKey(id: string) {
   return [...itemsQueryKey, id] as const
 }
 
+// Under itemsQueryKey. Item changes refresh this list too.
+export function useSoonQueryKey(days: number) {
+  return [...itemsQueryKey, 'use-soon', days] as const
+}
+
 export function listItems(): Promise<ItemResponse[]> {
   return apiFetch<ItemResponse[]>('/api/items')
+}
+
+export function listUseSoon(days: number): Promise<ItemResponse[]> {
+  return apiFetch<ItemResponse[]>(`/api/items/use-soon?days=${days}`)
 }
 
 export function getItem(id: string): Promise<ItemResponse> {

@@ -22,6 +22,8 @@ export type Category =
 
 export type ItemStatus = 'ACTIVE' | 'USED' | 'WASTED'
 
+export type ExpiryStatus = 'EXPIRED' | 'URGENT' | 'SOON' | 'FRESH'
+
 export type ItemResponse = {
   id: string
   name: string
@@ -31,6 +33,9 @@ export type ItemResponse = {
   unit: string
   // Date only, e.g. "2026-11-12".
   expiryDate: string
+  expiryStatus: ExpiryStatus
+  // Negative after the expiry date.
+  daysLeft: number
   status: ItemStatus
   createdAt: string
   updatedAt: string

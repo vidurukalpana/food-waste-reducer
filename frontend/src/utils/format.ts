@@ -33,3 +33,33 @@ const categoryLabels: Record<Category, string> = {
 export function formatCategory(category: Category): string {
   return categoryLabels[category]
 }
+
+const categoryEmojis: Record<Category, string> = {
+  DAIRY: '🥛',
+  MEAT: '🥩',
+  SEAFOOD: '🦐',
+  VEGETABLES: '🥦',
+  FRUITS: '🍎',
+  BAKERY: '🍞',
+  PANTRY: '🥫',
+  FROZEN: '🧊',
+  OTHER: '🧺',
+}
+
+export function categoryEmoji(category: Category): string {
+  return categoryEmojis[category]
+}
+
+function pluralDays(days: number): string {
+  return days === 1 ? '1 day' : `${days} days`
+}
+
+export function formatDaysLeft(daysLeft: number): string {
+  if (daysLeft < 0) {
+    return `Expired ${pluralDays(-daysLeft)} ago`
+  }
+  if (daysLeft === 0) {
+    return 'Expires today'
+  }
+  return `${pluralDays(daysLeft)} left`
+}

@@ -5,6 +5,7 @@ import foodwastereducer.common.NotFoundException;
 import foodwastereducer.user.User;
 import foodwastereducer.user.UserRepository;
 import java.time.Clock;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,25 @@ public class ItemService {
   @Transactional(readOnly = true)
   public List<ItemResponse> list(UUID ownerId, ItemStatus status) {
     return itemRepository.findByOwnerIdAndStatusOrderByExpiryDateAsc(ownerId, status).stream()
-        .map(ItemResponse::from)
+        .map(this::toResponse)
+        .toList();
+  }
+
+  // Expired items are included.
+  @Transactional(readOnly = true)
+  public List<ItemResponse> useSoon(UUID ownerId, int days) {
+    LocalDate today = LocalDate.now(clock);
+    return itemRepository
+        .findByOwnerIdAndStatusAndExpiryDateLessThanEqualOrderByExpiryDateAsc(
+            ownerId, ItemStatus.ACTIVE, today.plusDays(days))
+        .stream()
+        .map(item -> ItemResponse.from(item, today))
         .toList();
   }
 
   @Transactional(readOnly = true)
   public ItemResponse get(UUID ownerId, UUID itemId) {
-    return ItemResponse.from(findOwnedItem(ownerId, itemId));
+    return toResponse(findOwnedItem(ownerId, itemId));
   }
 
   @Transactional
@@ -49,7 +62,7 @@ public class ItemService {
             request.unit().strip(),
             request.expiryDate(),
             clock.instant());
-    return ItemResponse.from(itemRepository.save(item));
+    return toResponse(itemRepository.save(item));
   }
 
   @Transactional
@@ -63,7 +76,7 @@ public class ItemService {
         request.unit().strip(),
         request.expiryDate(),
         clock.instant());
-    return ItemResponse.from(item);
+    return toResponse(item);
   }
 
   @Transactional
@@ -87,7 +100,11 @@ public class ItemService {
       throw new ConflictException("Item is already closed");
     }
     item.close(finalStatus, clock.instant());
-    return ItemResponse.from(item);
+    return toResponse(item);
+  }
+
+  private ItemResponse toResponse(Item item) {
+    return ItemResponse.from(item, LocalDate.now(clock));
   }
 
   // Another user's item looks the same as a missing one: 404.

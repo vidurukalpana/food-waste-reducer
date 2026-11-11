@@ -3,7 +3,9 @@ import { Link, useNavigate, useParams } from 'react-router'
 import { ApiError } from '../api/client'
 import { getItem, itemQueryKey, itemsQueryKey, updateItem } from '../api/items'
 import type { ItemRequest, ItemResponse } from '../api/types'
+import { Alert } from '../components/Alert'
 import { ItemForm, type ItemFormValues } from '../components/ItemForm'
+import { PageHeader } from '../components/PageHeader'
 
 function toFormValues(item: ItemResponse): ItemFormValues {
   return {
@@ -30,16 +32,16 @@ export function ItemDetailPage() {
   }
 
   if (itemQuery.isPending) {
-    return <p>Loading item…</p>
+    return <p className="text-forest/60">Loading item…</p>
   }
   if (itemQuery.isError) {
     const notFound = itemQuery.error instanceof ApiError && itemQuery.error.status === 404
     return (
       <div>
-        <p role="alert" className="mb-4 rounded border border-red-500 bg-red-50 p-3 text-sm">
+        <Alert className="mb-4">
           {notFound ? 'Item not found' : `Could not load item: ${itemQuery.error.message}`}
-        </p>
-        <Link to="/items" className="underline">
+        </Alert>
+        <Link to="/items" className="font-semibold text-ochre hover:underline">
           Back to items
         </Link>
       </div>
@@ -48,7 +50,11 @@ export function ItemDetailPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold">Edit item</h1>
+      <PageHeader
+        title="Edit item"
+        subtitle={itemQuery.data.name}
+        back={{ to: '/items', label: 'Items' }}
+      />
       <ItemForm
         key={itemQuery.data.id}
         defaultValues={toFormValues(itemQuery.data)}

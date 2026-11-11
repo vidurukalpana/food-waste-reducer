@@ -5,7 +5,9 @@ import { Link } from 'react-router'
 import { z } from 'zod'
 import { applyServerErrors } from '../api/formErrors'
 import type { Category, ItemRequest } from '../api/types'
-import { formatCategory } from '../utils/format'
+import { categoryEmoji, formatCategory } from '../utils/format'
+import { Alert } from './Alert'
+import { cardClass, inputClass, labelClass, primaryButton, secondaryButton } from './styles'
 import { TextField } from './TextField'
 
 const categories = [
@@ -87,12 +89,12 @@ export function ItemForm({ defaultValues, submitLabel, onSubmit }: ItemFormProps
   }
 
   return (
-    <form onSubmit={handleSubmit(submit)} noValidate className="flex max-w-xl flex-col gap-4">
-      {errors.root?.server && (
-        <p role="alert" className="rounded border border-red-500 bg-red-50 p-3 text-sm">
-          {errors.root.server.message}
-        </p>
-      )}
+    <form
+      onSubmit={handleSubmit(submit)}
+      noValidate
+      className={`${cardClass} flex max-w-2xl flex-col gap-5 p-6 sm:p-8`}
+    >
+      {errors.root?.server && <Alert>{errors.root.server.message}</Alert>}
 
       <TextField
         label="Barcode (optional)"
@@ -103,24 +105,24 @@ export function ItemForm({ defaultValues, submitLabel, onSubmit }: ItemFormProps
       />
       <TextField label="Name" error={errors.name?.message} {...register('name')} />
 
-      <div className="flex flex-col gap-1">
-        <label htmlFor={categoryId} className="text-sm text-gray-700">
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor={categoryId} className={labelClass}>
           Category
         </label>
         <select
           id={categoryId}
           aria-invalid={errors.category ? true : undefined}
-          className={`rounded border bg-white px-3 py-2 ${errors.category ? 'border-red-500' : 'border-gray-400'}`}
+          className={inputClass(Boolean(errors.category))}
           {...register('category')}
         >
           <option value="">Choose a category</option>
           {categories.map((category) => (
             <option key={category} value={category}>
-              {formatCategory(category)}
+              {categoryEmoji(category)} {formatCategory(category)}
             </option>
           ))}
         </select>
-        {errors.category && <p className="text-sm text-red-700">{errors.category.message}</p>}
+        {errors.category && <p className="text-sm text-expired">{errors.category.message}</p>}
       </div>
 
       <div className="grid gap-4 sm:grid-cols-3">
@@ -149,15 +151,11 @@ export function ItemForm({ defaultValues, submitLabel, onSubmit }: ItemFormProps
         ))}
       </datalist>
 
-      <div className="flex gap-3">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="rounded bg-gray-800 px-5 py-2 font-semibold text-white disabled:opacity-60"
-        >
+      <div className="mt-2 flex flex-wrap gap-3 border-t border-forest/10 pt-5">
+        <button type="submit" disabled={isSubmitting} className={primaryButton}>
           {isSubmitting ? 'Saving…' : submitLabel}
         </button>
-        <Link to="/items" className="rounded border border-gray-700 px-5 py-2">
+        <Link to="/items" className={secondaryButton}>
           Cancel
         </Link>
       </div>

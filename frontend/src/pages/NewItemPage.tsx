@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { createItem, itemsQueryKey } from '../api/items'
 import type { ItemRequest } from '../api/types'
 import { ItemForm } from '../components/ItemForm'
+import { PageHeader } from '../components/PageHeader'
 
 export function NewItemPage() {
   const queryClient = useQueryClient()
@@ -17,7 +18,11 @@ export function NewItemPage() {
 
   return (
     <div>
-      <h1 className="mb-4 text-2xl font-bold">Add item</h1>
+      <PageHeader
+        title="Add item"
+        subtitle="What did you bring home?"
+        back={{ to: '/items', label: 'Items' }}
+      />
       <ItemForm
         defaultValues={{ quantity: '1', unit: 'pcs' }}
         submitLabel="Save"

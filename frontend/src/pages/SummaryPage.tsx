@@ -1,3 +1,5 @@
+import { PageHeader } from '../components/PageHeader'
+
 export function SummaryPage() {
-  return <h1 className="text-2xl font-bold">Monthly summary</h1>
+  return <PageHeader title="Monthly summary" subtitle="What you used and wasted this month." />
 }

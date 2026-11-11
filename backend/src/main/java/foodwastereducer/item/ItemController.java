@@ -2,6 +2,8 @@ package foodwastereducer.item;
 
 import foodwastereducer.auth.CurrentUser;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import java.net.URI;
 import java.util.List;
 import java.util.UUID;
@@ -34,6 +36,16 @@ public class ItemController {
   public List<ItemResponse> list(
       @AuthenticationPrincipal Jwt jwt, @RequestParam(defaultValue = "ACTIVE") ItemStatus status) {
     return itemService.list(CurrentUser.id(jwt), status);
+  }
+
+  @GetMapping("/use-soon")
+  public List<ItemResponse> useSoon(
+      @AuthenticationPrincipal Jwt jwt,
+      @RequestParam(defaultValue = "7")
+          @Min(value = 1, message = "Days must be between 1 and 30")
+          @Max(value = 30, message = "Days must be between 1 and 30")
+          int days) {
+    return itemService.useSoon(CurrentUser.id(jwt), days);
   }
 
   @GetMapping("/{id}")
