@@ -1,1 +1,28 @@
 @import 'tailwindcss';
+
+@theme {
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+
+  --color-forest: #0c3b2e;
+  --color-forest-light: #155240;
+  --color-sage: #6d9773;
+  --color-sage-light: #dcebdf;
+  --color-ochre: #b46617;
+  --color-sun: #ffba00;
+  --color-mint: #eef6f0;
+
+  /* Expiry status colours. Ink variants keep text readable on white. */
+  --color-expired: #a8322d;
+  --color-urgent: #b46617;
+  --color-soon: #ffba00;
+  --color-soon-ink: #8a6400;
+  --color-fresh: #6d9773;
+  --color-fresh-ink: #4a7350;
+}
+
+@layer base {
+  body {
+    @apply bg-mint font-sans text-forest antialiased;
+  }
+}

@@ -2,7 +2,11 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router'
 import { deleteItem, itemsQueryKey, listItems, markItemUsed, markItemWasted } from '../api/items'
 import type { ItemResponse } from '../api/types'
+import { Alert } from '../components/Alert'
+import { PlusIcon } from '../components/icons'
 import { ItemCard } from '../components/ItemCard'
+import { PageHeader } from '../components/PageHeader'
+import { cardClass, primaryButton } from '../components/styles'
 
 export function ItemsPage() {
   const queryClient = useQueryClient()
@@ -39,32 +43,39 @@ export function ItemsPage() {
     }
   }
 
+  const count = itemsQuery.isSuccess ? itemsQuery.data.length : null
+
   return (
     <div>
-      <div className="mb-4 flex items-center justify-between gap-2">
-        <h1 className="text-2xl font-bold">My items</h1>
-        <Link
-          to="/items/new"
-          className="rounded bg-gray-800 px-4 py-2 text-sm font-semibold text-white"
-        >
-          + Add item
-        </Link>
-      </div>
+      <PageHeader
+        title="My pantry"
+        subtitle={
+          count === null
+            ? 'Everything in your kitchen.'
+            : `${count} active ${count === 1 ? 'item' : 'items'}, soonest expiry first.`
+        }
+        action={
+          <Link to="/items/new" className={primaryButton}>
+            <PlusIcon className="size-4" />
+            Add item
+          </Link>
+        }
+      />
 
-      {actionError && (
-        <p role="alert" className="mb-4 rounded border border-red-500 bg-red-50 p-3 text-sm">
-          {actionError.message}
-        </p>
-      )}
+      {actionError && <Alert className="mb-4">{actionError.message}</Alert>}
 
-      {itemsQuery.isPending && <p>Loading items…</p>}
-      {itemsQuery.isError && (
-        <p role="alert" className="rounded border border-red-500 bg-red-50 p-3 text-sm">
-          Could not load items: {itemsQuery.error.message}
-        </p>
-      )}
+      {itemsQuery.isPending && <p className="text-forest/60">Loading items…</p>}
+      {itemsQuery.isError && <Alert>Could not load items: {itemsQuery.error.message}</Alert>}
       {itemsQuery.isSuccess && itemsQuery.data.length === 0 && (
-        <p className="text-gray-600">No items yet.</p>
+        <div className={`${cardClass} p-8 text-center`}>
+          <p className="text-3xl" aria-hidden="true">
+            🧺
+          </p>
+          <p className="mt-2 font-semibold">No items yet</p>
+          <p className="text-sm text-forest/60">
+            Add the food in your kitchen to start tracking it.
+          </p>
+        </div>
       )}
       {itemsQuery.isSuccess && itemsQuery.data.length > 0 && (
         <ul className="grid gap-3 md:grid-cols-2">

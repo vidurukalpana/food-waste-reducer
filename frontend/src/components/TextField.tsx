@@ -1,4 +1,5 @@
 import { useId, type ComponentProps } from 'react'
+import { inputClass, labelClass } from './styles'
 
 type TextFieldProps = ComponentProps<'input'> & {
   label: string
@@ -10,19 +11,19 @@ export function TextField({ label, error, ...inputProps }: TextFieldProps) {
   const errorId = `${id}-error`
 
   return (
-    <div className="flex flex-col gap-1">
-      <label htmlFor={id} className="text-sm text-gray-700">
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className={labelClass}>
         {label}
       </label>
       <input
         id={id}
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? errorId : undefined}
-        className={`rounded border px-3 py-2 ${error ? 'border-red-500' : 'border-gray-400'}`}
+        className={inputClass(Boolean(error))}
         {...inputProps}
       />
       {error && (
-        <p id={errorId} className="text-sm text-red-700">
+        <p id={errorId} className="text-sm text-expired">
           {error}
         </p>
       )}

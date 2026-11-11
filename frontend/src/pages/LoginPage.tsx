@@ -6,6 +6,9 @@ import { apiFetch } from '../api/client'
 import { applyServerErrors } from '../api/formErrors'
 import type { LoginResponse } from '../api/types'
 import { useAuth } from '../auth/useAuth'
+import { Alert } from '../components/Alert'
+import { AuthLayout } from '../components/AuthLayout'
+import { primaryButton } from '../components/styles'
 import { TextField } from '../components/TextField'
 
 const loginSchema = z.object({
@@ -47,19 +50,13 @@ export function LoginPage() {
   }
 
   return (
-    <div className="mx-auto max-w-sm">
-      <h1 className="mb-4 text-2xl font-bold">Log in</h1>
-
+    <AuthLayout title="Welcome back" subtitle="Log in to see what to use first.">
       {state?.registered && (
-        <p role="status" className="mb-4 rounded border border-green-600 bg-green-50 p-3 text-sm">
+        <Alert tone="success" className="mb-4">
           Account created. Log in to continue.
-        </p>
+        </Alert>
       )}
-      {errors.root?.server && (
-        <p role="alert" className="mb-4 rounded border border-red-500 bg-red-50 p-3 text-sm">
-          {errors.root.server.message}
-        </p>
-      )}
+      {errors.root?.server && <Alert className="mb-4">{errors.root.server.message}</Alert>}
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-4">
         <TextField
@@ -79,18 +76,18 @@ export function LoginPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="rounded bg-gray-800 px-4 py-2 font-semibold text-white disabled:opacity-60"
+          className={`${primaryButton} mt-2 w-full py-3`}
         >
           {isSubmitting ? 'Logging in…' : 'Log in'}
         </button>
       </form>
 
-      <p className="mt-4 text-center text-sm">
+      <p className="mt-6 text-center text-sm text-forest/70">
         No account?{' '}
-        <Link to="/register" className="font-semibold underline">
-          Register
+        <Link to="/register" className="font-semibold text-ochre hover:underline">
+          Create one
         </Link>
       </p>
-    </div>
+    </AuthLayout>
   )
 }
