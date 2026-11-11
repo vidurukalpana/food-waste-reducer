@@ -1,7 +1,6 @@
 import { Navigate, NavLink, Route, Routes, useNavigate } from 'react-router'
 import { ProtectedRoute } from './auth/ProtectedRoute'
 import { useAuth } from './auth/useAuth'
-import { ApiStatus } from './components/ApiStatus'
 import { DashboardPage } from './pages/DashboardPage'
 import { ItemDetailPage } from './pages/ItemDetailPage'
 import { ItemsPage } from './pages/ItemsPage'
@@ -41,17 +40,14 @@ function Header() {
           ))}
         </nav>
       )}
-      <div className="flex items-center gap-3 text-sm">
-        <ApiStatus />
-        {token && (
-          <>
-            {user && <span className="text-gray-700">{user.email}</span>}
-            <button type="button" onClick={handleLogout} className="underline">
-              Log out
-            </button>
-          </>
-        )}
-      </div>
+      {token && (
+        <div className="flex items-center gap-3 text-sm">
+          {user && <span className="text-gray-700">{user.email}</span>}
+          <button type="button" onClick={handleLogout} className="underline">
+            Log out
+          </button>
+        </div>
+      )}
     </header>
   )
 }

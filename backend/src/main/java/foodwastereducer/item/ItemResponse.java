@@ -13,12 +13,14 @@ public record ItemResponse(
     BigDecimal quantity,
     String unit,
     LocalDate expiryDate,
+    ExpiryStatus expiryStatus,
+    long daysLeft,
     ItemStatus status,
     Instant createdAt,
     Instant updatedAt,
     Instant closedAt) {
 
-  public static ItemResponse from(Item item) {
+  public static ItemResponse from(Item item, LocalDate today) {
     return new ItemResponse(
         item.getId(),
         item.getName(),
@@ -27,6 +29,8 @@ public record ItemResponse(
         item.getQuantity(),
         item.getUnit(),
         item.getExpiryDate(),
+        ExpiryStatus.of(item.getExpiryDate(), today),
+        ExpiryStatus.daysLeft(item.getExpiryDate(), today),
         item.getStatus(),
         item.getCreatedAt(),
         item.getUpdatedAt(),
