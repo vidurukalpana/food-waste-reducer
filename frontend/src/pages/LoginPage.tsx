@@ -50,7 +50,7 @@ export function LoginPage() {
   }
 
   return (
-    <AuthLayout title="Welcome back" subtitle="Log in to see what to use first.">
+    <AuthLayout title="Welcome back">
       {state?.registered && (
         <Alert tone="success" className="mb-4">
           Account created. Log in to continue.

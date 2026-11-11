@@ -119,7 +119,7 @@ export function DashboardPage() {
         </div>
       )}
       {useSoonQuery.isSuccess && useSoonQuery.data.length > 0 && (
-        <ul className="grid gap-3 md:grid-cols-2">
+        <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {useSoonQuery.data.map((item) => (
             <UseSoonCard key={item.id} item={item} />
           ))}

@@ -78,7 +78,7 @@ export function ItemsPage() {
         </div>
       )}
       {itemsQuery.isSuccess && itemsQuery.data.length > 0 && (
-        <ul className="grid gap-3 md:grid-cols-2">
+        <ul className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {itemsQuery.data.map((item) => (
             <ItemCard
               key={item.id}

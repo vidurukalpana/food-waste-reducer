@@ -20,7 +20,7 @@ function Header() {
 
   return (
     <header className="bg-forest">
-      <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <Link to="/dashboard" aria-label="Dashboard">
           <Brand />
         </Link>
@@ -94,7 +94,7 @@ export function AppLayout() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="mx-auto max-w-5xl px-4 pb-28 pt-6 sm:pb-10">
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pb-28 pt-6 sm:pb-10">
         <Outlet />
       </main>
       <BottomNav />

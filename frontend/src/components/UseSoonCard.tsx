@@ -16,7 +16,8 @@ export function UseSoonCard({ item }: { item: ItemResponse }) {
   const days = Math.abs(item.daysLeft)
 
   return (
-    <li>
+    // min-w-0 lets the grid cell shrink. Long names then truncate.
+    <li className="min-w-0">
       <Link
         to={`/items/${item.id}`}
         className={`${cardClass} flex items-center gap-4 p-3 pr-4 transition hover:-translate-y-0.5 hover:shadow-md`}
