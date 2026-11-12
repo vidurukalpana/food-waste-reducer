@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Waste Reducer</title>
+    <meta
+      name="description"
+      content="A web app that tracks food at home, shows what to use first and reports what was used or wasted each month."
+    />
+    <meta name="theme-color" content="#0c3b2e" />
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400..700&family=DM+Serif+Display&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="#top">
+          <img src="assets/favicon.svg" alt="" width="32" height="32" />
+          <span>Food Waste Reducer</span>
+        </a>
+        <nav aria-label="Sections">
+          <a href="#problem">Problem</a>
+          <a href="#solution">Solution</a>
+          <a href="#tour">App Tour</a>
+          <a href="#features">Features</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#data-flow">Data Flow</a>
+          <a href="#tech-stack">Tech Stack</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section id="top" class="hero">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1>Food Waste Reducer</h1>
+            <p class="intro">
+              A full-stack web application that helps households use food before it expires. Users
+              record the food in their kitchen, see what to use first and track how much they use or
+              waste each month. Built with React, TypeScript, Spring Boot and PostgreSQL.
+            </p>
+            <a class="button" href="https://github.com/vidurukalpana/food-waste-reducer">View on GitHub</a>
+          </div>
+          <figure class="screens hero-screens">
+            <div class="browser"><img src="assets/screens/dashboard-desktop.webp" alt="Food Waste Reducer dashboard on desktop" width="2560" height="1600" fetchpriority="high" /></div>
+            <div class="phone"><img src="assets/screens/summary-phone.webp" alt="Monthly summary on mobile" width="780" height="1688" /></div>
+          </figure>
+        </div>
+      </section>
+
+      <section id="problem" class="section">
+        <div class="container">
+          <h2>Problem</h2>
+          <p class="intro">
+            Food at home is often forgotten until it has already expired. Expiry dates are checked
+            too late, and households have no clear record of how much food they throw away each
+            month.
+          </p>
+          <ul class="points">
+            <li>Food is forgotten at the back of the fridge or pantry.</li>
+            <li>Expiry dates are checked only after the food has spoiled.</li>
+            <li>There is no record of how much food is wasted.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="solution" class="section section-tint">
+        <div class="container">
+          <h2>Solution</h2>
+          <p class="intro">
+            Food Waste Reducer keeps a list of the food in a home kitchen with its expiry date. It
+            shows what to use first, sends an optional morning email before food expires and reports
+            what was used or wasted each month.
+          </p>
+          <ol class="steps">
+            <li><span>1</span>Track every item with its expiry date.</li>
+            <li><span>2</span>See what to use first, colour-coded by urgency.</li>
+            <li><span>3</span>Receive one email when food is about to expire.</li>
+            <li><span>4</span>Review used and wasted food month by month.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="tour" class="section">
+        <div class="container">
+          <h2>App Tour</h2>
+          <p class="intro">
+            The main screens of the web app. Every screen is designed for both desktop and mobile.
+          </p>
+
+          <div class="tabs" role="tablist" aria-label="App screens">
+            <button role="tab" id="tab-dashboard" aria-controls="panel-dashboard" aria-selected="true">Dashboard</button>
+            <button role="tab" id="tab-items" aria-controls="panel-items" aria-selected="false">Items</button>
+            <button role="tab" id="tab-add-item" aria-controls="panel-add-item" aria-selected="false">Add item</button>
+            <button role="tab" id="tab-summary" aria-controls="panel-summary" aria-selected="false">Summary</button>
+            <button role="tab" id="tab-settings" aria-controls="panel-settings" aria-selected="false">Settings</button>
+            <button role="tab" id="tab-login" aria-controls="panel-login" aria-selected="false">Sign in</button>
+          </div>
+
+          <div class="panel" role="tabpanel" id="panel-dashboard" aria-labelledby="tab-dashboard">
+            <figure class="screens">
+              <div class="browser"><img src="assets/screens/dashboard-desktop.webp" alt="Dashboard on desktop" width="2560" height="1600" /></div>
+              <div class="phone"><img src="assets/screens/dashboard-phone.webp" alt="Dashboard on mobile" width="780" height="1688" loading="lazy" /></div>
+            </figure>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-items" aria-labelledby="tab-items">
+            <figure class="screens">
+              <div class="browser"><img src="assets/screens/items-desktop.webp" alt="Item list on desktop" width="2560" height="1600" loading="lazy" /></div>
+              <div class="phone"><img src="assets/screens/items-phone.webp" alt="Item list on mobile" width="780" height="1688" loading="lazy" /></div>
+            </figure>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-add-item" aria-labelledby="tab-add-item">
+            <figure class="screens">
+              <div class="browser"><img src="assets/screens/add-item-desktop.webp" alt="Add item form on desktop" width="2560" height="1600" loading="lazy" /></div>
+              <div class="phone"><img src="assets/screens/add-item-phone.webp" alt="Add item form on mobile" width="780" height="1688" loading="lazy" /></div>
+            </figure>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-summary" aria-labelledby="tab-summary">
+            <figure class="screens">
+              <div class="browser"><img src="assets/screens/summary-desktop.webp" alt="Monthly summary on desktop" width="2560" height="1600" loading="lazy" /></div>
+              <div class="phone"><img src="assets/screens/summary-phone.webp" alt="Monthly summary on mobile" width="780" height="1688" loading="lazy" /></div>
+            </figure>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-settings" aria-labelledby="tab-settings">
+            <figure class="screens">
+              <div class="browser"><img src="assets/screens/settings-desktop.webp" alt="Settings on desktop" width="2560" height="1600" loading="lazy" /></div>
+              <div class="phone"><img src="assets/screens/settings-phone.webp" alt="Settings on mobile" width="780" height="1688" loading="lazy" /></div>
+            </figure>
+          </div>
+          <div class="panel" role="tabpanel" id="panel-login" aria-labelledby="tab-login">
+            <figure class="screens">
+              <div class="browser"><img src="assets/screens/login-desktop.webp" alt="Sign in on desktop" width="2560" height="1600" loading="lazy" /></div>
+              <div class="phone"><img src="assets/screens/login-phone.webp" alt="Sign in on mobile" width="780" height="1688" loading="lazy" /></div>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section id="features" class="section section-tint">
+        <div class="container">
+          <h2>Features</h2>
+          <p class="intro">
+            A focused set of features that follows each item from the day it is bought to the day it
+            is used or thrown away.
+          </p>
+          <ul class="cards">
+            <li class="card">
+              <h3>Accounts</h3>
+              <p>Register and sign in with email and password. Each user sees only their own items.</p>
+            </li>
+            <li class="card">
+              <h3>Item tracking</h3>
+              <p>Add, edit and delete items with category, quantity, unit and expiry date.</p>
+            </li>
+            <li class="card">
+              <h3>Use-soon dashboard</h3>
+              <p>
+                Items marked <b class="tag tag-expired">Expired</b> <b class="tag tag-urgent">Urgent</b>
+                <b class="tag tag-soon">Soon</b> or <b class="tag tag-fresh">Fresh</b>, with the next
+                seven days first.
+              </p>
+            </li>
+            <li class="card">
+              <h3>Used or wasted</h3>
+              <p>Close an item as used or wasted in one tap.</p>
+            </li>
+            <li class="card">
+              <h3>Email reminder</h3>
+              <p>An optional 7:00 AM email for items that expire within two days. Each item is listed once.</p>
+            </li>
+            <li class="card">
+              <h3>Monthly summary</h3>
+              <p>Used and wasted counts, waste rate and a breakdown by category for any month.</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="architecture" class="section">
+        <div class="container">
+          <h2>Architecture</h2>
+          <p class="intro">
+            A three-tier web application. A React single-page app calls a Spring Boot REST API over
+            HTTPS with a JWT token. The API stores data in PostgreSQL and sends reminder emails
+            through Brevo. A GitHub Actions schedule triggers the daily reminder.
+          </p>
+
+          <div class="arch" role="img" aria-label="Architecture: React frontend on Vercel calls the Spring Boot backend on Render over HTTPS with JWT. The backend uses PostgreSQL on Neon plus the Brevo email API. GitHub Actions triggers the daily reminder.">
+            <div class="tier">
+              <h3>Frontend <small>Vercel</small></h3>
+              <div class="box box-strong">React SPA<br /><small>TypeScript · Vite</small></div>
+              <div class="box">Dashboard · Items · Summary · Settings</div>
+              <div class="box">TanStack Query · JWT</div>
+            </div>
+
+            <div class="link"><span>HTTPS + JWT</span></div>
+
+            <div class="tier">
+              <h3>Backend <small>Render · Docker</small></h3>
+              <div class="box box-strong">Spring Boot API<br /><small>Java 17</small></div>
+              <div class="box">Security filter (JWT)</div>
+              <div class="box">REST controllers</div>
+              <div class="box">Services · Clock (Asia/Colombo)</div>
+              <div class="box">Repositories (JPA) · Flyway</div>
+              <div class="box">Scheduled job (07:00)</div>
+            </div>
+
+            <div class="link"><span>SQL · HTTPS</span></div>
+
+            <div class="tier">
+              <h3>Data &amp; services</h3>
+              <div class="box box-strong">PostgreSQL<br /><small>Neon · users, items</small></div>
+              <div class="box box-strong">Brevo<br /><small>Email delivery</small></div>
+              <div class="box box-strong">GitHub Actions<br /><small>Daily reminder trigger</small></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="data-flow" class="section section-tint">
+        <div class="container">
+          <h2>Data Flow</h2>
+          <p class="intro">
+            Three flows show how data moves through the system: adding an item, the daily reminder
+            and the monthly summary.
+          </p>
+
+          <div class="flows">
+            <article class="flow">
+              <h3>Add an item</h3>
+              <ol>
+                <li>The form validates the input in the browser.</li>
+                <li><code>POST /api/items</code> is sent with the JWT token.</li>
+                <li>The API validates the item and saves it in PostgreSQL.</li>
+                <li>The response includes the expiry status and days left.</li>
+                <li>The dashboard and item list refresh.</li>
+              </ol>
+            </article>
+            <article class="flow">
+              <h3>Daily reminder</h3>
+              <ol>
+                <li>GitHub Actions runs at 07:00 Sri Lanka time.</li>
+                <li><code>POST /api/internal/reminders/run</code> is sent with a secret header.</li>
+                <li>The API finds users with reminders on who have not been emailed today.</li>
+                <li>Items that expire within two days and were not listed before are collected.</li>
+                <li>One email per user is sent through Brevo. The items are marked as sent.</li>
+              </ol>
+            </article>
+            <article class="flow">
+              <h3>Monthly summary</h3>
+              <ol>
+                <li>An item is marked used or wasted. The closing time is saved.</li>
+                <li>The summary page requests <code>GET /api/summary?month=YYYY-MM</code>.</li>
+                <li>The API counts closed items by category within the Sri Lanka month.</li>
+                <li>The page shows the counts, the waste rate and category bars.</li>
+              </ol>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="tech-stack" class="section">
+        <div class="container">
+          <h2>Tech Stack</h2>
+          <p class="intro">Open-source tools with free hosting tiers.</p>
+          <dl class="stack">
+            <div>
+              <dt>Frontend</dt>
+              <dd><span>React</span><span>TypeScript</span><span>Vite</span><span>React Router</span><span>TanStack Query</span><span>React Hook Form</span><span>Zod</span><span>Tailwind CSS</span></dd>
+            </div>
+            <div>
+              <dt>Backend</dt>
+              <dd><span>Java 17</span><span>Spring Boot 4</span><span>Spring Web</span><span>Spring Security (JWT)</span><span>Spring Data JPA</span><span>Bean Validation</span><span>Flyway</span><span>Actuator</span><span>Maven</span></dd>
+            </div>
+            <div>
+              <dt>Database</dt>
+              <dd><span>PostgreSQL</span></dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><span>Brevo</span></dd>
+            </div>
+            <div>
+              <dt>Testing</dt>
+              <dd><span>JUnit 5</span><span>Mockito</span><span>AssertJ</span><span>Testcontainers</span><span>Vitest</span><span>React Testing Library</span></dd>
+            </div>
+            <div>
+              <dt>DevOps</dt>
+              <dd><span>Git</span><span>GitHub</span><span>Docker</span><span>Docker Compose</span><span>GitHub Actions</span></dd>
+            </div>
+            <div>
+              <dt>Hosting</dt>
+              <dd><span>Vercel</span><span>Render</span><span>Neon</span><span>GitHub Pages</span></dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">Food Waste Reducer</div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
