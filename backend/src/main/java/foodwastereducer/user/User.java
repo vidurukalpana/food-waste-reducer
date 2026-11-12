@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -28,6 +29,10 @@ public class User {
 
   @Column(name = "reminder_enabled", nullable = false)
   private boolean reminderEnabled = true;
+
+  // Written by UserRepository.markReminded. Read by its reminder query.
+  @Column(name = "last_reminder_date")
+  private LocalDate lastReminderDate;
 
   protected User() {}
 

@@ -79,14 +79,16 @@ As a user, I want to mark an item as used or wasted, so that my list shows only 
 
 ## US-07 Receive a daily reminder email
 
-As a user, I want an email each morning listing food about to expire, so that I remember to use it without opening the app.
+As a user, I want an email when food is about to expire, so that I remember to use it without opening the app.
 
 **Acceptance criteria**
 
 1. **Given** reminders are on and I have items that expired or expire within 2 days, **when** it is 7:00 AM, **then** I receive one email listing each item's name, expiry date and status.
-2. **Given** I have no items expiring within 2 days, **when** it is 7:00 AM, **then** I receive no email.
-3. **Given** I already received today's email, **when** the reminder job runs again the same day, **then** I do not receive a second email.
-4. **Given** I switch off **Daily email reminder** in settings, **when** it is 7:00 AM, **then** I receive no email.
+2. **Given** an item was already listed in an earlier email, **when** the next day's reminder runs, **then** that item is not listed again.
+3. **Given** I change an item's expiry date, **when** the new date is within 2 days, **then** the item is listed once more.
+4. **Given** I have no new items expiring within 2 days, **when** it is 7:00 AM, **then** I receive no email.
+5. **Given** I already received today's email, **when** the reminder job runs again the same day, **then** I do not receive a second email.
+6. **Given** I switch off **Daily email reminder** in settings, **when** it is 7:00 AM, **then** I receive no email.
 
 ## US-08 See a monthly summary
 
