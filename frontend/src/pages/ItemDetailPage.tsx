@@ -14,7 +14,6 @@ function toFormValues(item: ItemResponse): ItemFormValues {
     quantity: String(item.quantity),
     unit: item.unit,
     expiryDate: item.expiryDate,
-    barcode: item.barcode ?? '',
   }
 }
 

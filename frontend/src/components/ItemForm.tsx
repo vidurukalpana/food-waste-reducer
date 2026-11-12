@@ -40,15 +40,11 @@ const itemSchema = z.object({
     .refine((value) => Number(value) > 0, 'Quantity must be greater than 0'),
   unit: z.string().trim().min(1, 'Unit is required').max(20, 'Unit must be at most 20 characters'),
   expiryDate: z.string().min(1, 'Expiry date is required'),
-  barcode: z
-    .string()
-    .trim()
-    .regex(/^(\d{8,14})?$/, 'Barcode must be 8 to 14 digits'),
 })
 
 export type ItemFormValues = z.infer<typeof itemSchema>
 
-const formFields = ['name', 'category', 'quantity', 'unit', 'expiryDate', 'barcode'] as const
+const formFields = ['name', 'category', 'quantity', 'unit', 'expiryDate'] as const
 
 function toItemRequest(values: ItemFormValues): ItemRequest {
   return {
@@ -57,7 +53,6 @@ function toItemRequest(values: ItemFormValues): ItemRequest {
     quantity: Number(values.quantity),
     unit: values.unit,
     expiryDate: values.expiryDate,
-    barcode: values.barcode === '' ? null : values.barcode,
   }
 }
 
@@ -77,7 +72,7 @@ export function ItemForm({ defaultValues, submitLabel, onSubmit }: ItemFormProps
     formState: { errors, isSubmitting },
   } = useForm<ItemFormValues>({
     resolver: zodResolver(itemSchema),
-    defaultValues: { category: undefined, barcode: '', ...defaultValues },
+    defaultValues: { category: undefined, ...defaultValues },
   })
 
   const submit = async (values: ItemFormValues) => {
@@ -96,13 +91,6 @@ export function ItemForm({ defaultValues, submitLabel, onSubmit }: ItemFormProps
     >
       {errors.root?.server && <Alert>{errors.root.server.message}</Alert>}
 
-      <TextField
-        label="Barcode (optional)"
-        inputMode="numeric"
-        placeholder="8–14 digits"
-        error={errors.barcode?.message}
-        {...register('barcode')}
-      />
       <TextField label="Name" error={errors.name?.message} {...register('name')} />
 
       <div className="flex flex-col gap-1.5">

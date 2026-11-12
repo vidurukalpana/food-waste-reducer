@@ -6,12 +6,11 @@ All dates and times use Sri Lanka time (`Asia/Colombo`, UTC+05:30). "Today" mean
 | --- | --- |
 | 1. Register, log in | US-01, US-02 |
 | 2. Add, edit, delete items | US-03, US-04 |
-| 3. Barcode lookup | US-05 |
-| 4. Use soon dashboard | US-06 |
-| 5. Mark used or wasted | US-07 |
-| 6. Recipe ideas | US-08 |
-| 7. Daily email reminder | US-09 |
-| 8. Monthly summary | US-10 |
+| 3. Use soon dashboard | US-05 |
+| 4. Mark used or wasted | US-06 |
+| 5. Recipe ideas | US-07 |
+| 6. Daily email reminder | US-08 |
+| 7. Monthly summary | US-09 |
 
 ---
 
@@ -57,18 +56,7 @@ As a user, I want to edit or delete an item, so that my list stays correct.
 2. **Given** I have an item, **when** I click **Delete** and confirm, **then** the item is removed from my list.
 3. **Given** an item belongs to another user, **when** I open its URL, **then** I see "Item not found".
 
-## US-05 Look up a product by barcode
-
-As a user, I want the product name filled in from its barcode, so that adding items is quick.
-
-**Acceptance criteria**
-
-1. **Given** I am on the item form, **when** I type barcode `3017620422003` and click **Look up**, **then** the name and category fields are filled in.
-2. **Given** I am on the item form on my phone, **when** I click **Scan** and point the back camera at a barcode, **then** the barcode field is filled, the lookup runs, and the camera turns off.
-3. **Given** the barcode is unknown, **when** I click **Look up**, **then** I see "Not found, enter manually" and can type the name myself.
-4. **Given** the name was filled from a barcode, **when** I edit any field, **then** my changes are kept.
-
-## US-06 See what to use soon
+## US-05 See what to use soon
 
 As a user, I want a dashboard that shows which items expire first, so that I eat them in time.
 
@@ -80,7 +68,7 @@ As a user, I want a dashboard that shows which items expire first, so that I eat
 4. **Given** I have active items, **when** I open the dashboard, **then** I see a count of items for each colour.
 5. **Given** I open the dashboard on a phone, **when** the page loads, **then** cards fit the screen without sideways scrolling.
 
-## US-07 Mark an item as used or wasted
+## US-06 Mark an item as used or wasted
 
 As a user, I want to mark an item as used or wasted, so that my list shows only food I still have.
 
@@ -90,7 +78,7 @@ As a user, I want to mark an item as used or wasted, so that my list shows only 
 2. **Given** I have an active item, **when** I click **Wasted**, **then** it leaves my active list and is counted as wasted in this month's summary.
 3. **Given** an item is already marked used or wasted, **when** I try to mark it again, **then** I see "Item is already closed" and nothing changes.
 
-## US-08 Get recipe ideas
+## US-07 Get recipe ideas
 
 As a user, I want recipe ideas for an expiring item, so that I can cook it before it goes bad.
 
@@ -101,7 +89,7 @@ As a user, I want recipe ideas for an expiring item, so that I can cook it befor
 3. **Given** I have an item with an unusual name, **when** I click **Recipe ideas**, **then** I see "No recipes found".
 4. **Given** an item is orange or red on the dashboard, **when** I look at its card, **then** it has a **Recipe ideas** button.
 
-## US-09 Receive a daily reminder email
+## US-08 Receive a daily reminder email
 
 As a user, I want an email each morning listing food about to expire, so that I remember to use it without opening the app.
 
@@ -112,7 +100,7 @@ As a user, I want an email each morning listing food about to expire, so that I 
 3. **Given** I already received today's email, **when** the reminder job runs again the same day, **then** I do not receive a second email.
 4. **Given** I switch off **Daily email reminder** in settings, **when** it is 7:00 AM, **then** I receive no email.
 
-## US-10 See a monthly summary
+## US-09 See a monthly summary
 
 As a user, I want to see how much food I used versus wasted each month, so that I can track my progress.
 

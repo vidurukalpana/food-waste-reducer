@@ -10,48 +10,38 @@
 
   <text x="16" y="94" font-size="20" font-weight="bold" fill="#222222">Add item</text>
 
-  <!-- Barcode -->
-  <text x="16" y="128" font-size="13" fill="#444444">Barcode (optional)</text>
-  <rect x="16" y="136" width="176" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
-  <text x="28" y="161" font-size="14" fill="#aaaaaa">8–14 digits</text>
-  <rect x="200" y="136" width="70" height="40" rx="4" fill="#ffffff" stroke="#333333"/>
-  <text x="235" y="161" text-anchor="middle" font-size="13" fill="#222222">Look up</text>
-  <rect x="278" y="136" width="66" height="40" rx="4" fill="#ffffff" stroke="#333333"/>
-  <text x="311" y="161" text-anchor="middle" font-size="13" fill="#222222">Scan</text>
-
   <!-- Name with validation error -->
-  <text x="16" y="206" font-size="13" fill="#444444">Name</text>
-  <rect x="16" y="214" width="328" height="40" rx="4" fill="#ffffff" stroke="#d9534f" stroke-width="2"/>
-  <text x="16" y="272" font-size="12" fill="#a94442">Name is required</text>
+  <text x="16" y="128" font-size="13" fill="#444444">Name</text>
+  <rect x="16" y="136" width="328" height="40" rx="4" fill="#ffffff" stroke="#d9534f" stroke-width="2"/>
+  <text x="16" y="194" font-size="12" fill="#a94442">Name is required</text>
 
   <!-- Category -->
-  <text x="16" y="300" font-size="13" fill="#444444">Category</text>
-  <rect x="16" y="308" width="328" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
-  <text x="28" y="333" font-size="14" fill="#222222">Dairy</text>
-  <text x="330" y="333" text-anchor="end" font-size="12" fill="#666666">▼</text>
+  <text x="16" y="222" font-size="13" fill="#444444">Category</text>
+  <rect x="16" y="230" width="328" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
+  <text x="28" y="255" font-size="14" fill="#222222">Dairy</text>
+  <text x="330" y="255" text-anchor="end" font-size="12" fill="#666666">▼</text>
 
   <!-- Quantity, unit -->
-  <text x="16" y="378" font-size="13" fill="#444444">Quantity</text>
-  <rect x="16" y="386" width="156" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
-  <text x="28" y="411" font-size="14" fill="#222222">1</text>
-  <text x="188" y="378" font-size="13" fill="#444444">Unit</text>
-  <rect x="188" y="386" width="156" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
-  <text x="200" y="411" font-size="14" fill="#222222">pcs</text>
-  <text x="330" y="411" text-anchor="end" font-size="12" fill="#666666">▼</text>
+  <text x="16" y="300" font-size="13" fill="#444444">Quantity</text>
+  <rect x="16" y="308" width="156" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
+  <text x="28" y="333" font-size="14" fill="#222222">1</text>
+  <text x="188" y="300" font-size="13" fill="#444444">Unit</text>
+  <rect x="188" y="308" width="156" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
+  <text x="200" y="333" font-size="14" fill="#222222">pcs</text>
+  <text x="330" y="333" text-anchor="end" font-size="12" fill="#666666">▼</text>
 
   <!-- Expiry date -->
-  <text x="16" y="456" font-size="13" fill="#444444">Expiry date</text>
-  <rect x="16" y="464" width="328" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
-  <text x="28" y="489" font-size="14" fill="#222222">12/11/2026</text>
+  <text x="16" y="378" font-size="13" fill="#444444">Expiry date</text>
+  <rect x="16" y="386" width="328" height="40" rx="4" fill="#ffffff" stroke="#999999"/>
+  <text x="28" y="411" font-size="14" fill="#222222">12/11/2026</text>
 
   <!-- Actions -->
-  <rect x="16" y="536" width="156" height="44" rx="4" fill="#333333"/>
-  <text x="94" y="563" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Save</text>
-  <rect x="188" y="536" width="156" height="44" rx="4" fill="#ffffff" stroke="#333333"/>
-  <text x="266" y="563" text-anchor="middle" font-size="15" fill="#222222">Cancel</text>
+  <rect x="16" y="458" width="156" height="44" rx="4" fill="#333333"/>
+  <text x="94" y="485" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Save</text>
+  <rect x="188" y="458" width="156" height="44" rx="4" fill="#ffffff" stroke="#333333"/>
+  <text x="266" y="485" text-anchor="middle" font-size="15" fill="#222222">Cancel</text>
 
-  <text x="180" y="616" text-anchor="middle" font-size="11" fill="#999999">Edit page: same form, title "Edit item", fields pre-filled.</text>
-  <text x="180" y="634" text-anchor="middle" font-size="11" fill="#999999">Unknown barcode: "Not found, enter manually" under the field.</text>
+  <text x="180" y="538" text-anchor="middle" font-size="11" fill="#999999">Edit page: same form, title "Edit item", fields pre-filled.</text>
 
   <!-- Bottom navigation -->
   <rect x="0" y="704" width="360" height="56" fill="#eeeeee"/>

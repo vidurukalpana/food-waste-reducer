@@ -8,7 +8,6 @@ import java.util.UUID;
 public record ItemResponse(
     UUID id,
     String name,
-    String barcode,
     Category category,
     BigDecimal quantity,
     String unit,
@@ -24,7 +23,6 @@ public record ItemResponse(
     return new ItemResponse(
         item.getId(),
         item.getName(),
-        item.getBarcode(),
         item.getCategory(),
         item.getQuantity(),
         item.getUnit(),
