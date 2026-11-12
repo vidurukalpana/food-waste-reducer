@@ -49,6 +49,22 @@ export type ItemRequest = {
   expiryDate: string
 }
 
+export type CategorySummary = {
+  category: Category
+  used: number
+  wasted: number
+}
+
+export type MonthlySummary = {
+  // "YYYY-MM", e.g. "2026-11".
+  month: string
+  used: number
+  wasted: number
+  // 0–100, one decimal.
+  wasteRate: number
+  categories: CategorySummary[]
+}
+
 export type UserSettings = {
   reminderEnabled: boolean
 }
