@@ -20,7 +20,7 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
                                                           └────────────────────────────────────────────┘
 ```
 
-**Legend:** `PK` primary key · `FK` foreign key · `UNIQUE` no duplicates · `NULL` value is optional (every other column is `NOT NULL`) · `V3` added by the V3 migration (step 8) · `1 ── *` one user owns many items
+**Legend:** `PK` primary key · `FK` foreign key · `UNIQUE` no duplicates · `NULL` value is optional (every other column is `NOT NULL`) · `V3` added by the V3 migration (step 7) · `1 ── *` one user owns many items
 
 ## users
 
