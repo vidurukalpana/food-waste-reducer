@@ -1,6 +1,6 @@
 # Food Waste Reducer
 
-Food Waste Reducer tracks the food in your kitchen, warns you before it expires, then suggests recipes to use it up.
+Food Waste Reducer tracks the food in your kitchen. It warns you before food expires.
 
 ## Problem
 
@@ -19,18 +19,17 @@ Food Waste Reducer tracks the food in your kitchen, warns you before it expires,
    - Yellow: expires within 7 days
    - Green: later
 4. Mark an item as **used** or **wasted**.
-5. Recipe ideas for an expiring item.
-6. Daily email at 7:00 AM (Sri Lanka time) listing items expiring within 2 days; can be switched off.
-7. Monthly summary of items used vs wasted.
+5. Daily email at 7:00 AM (Sri Lanka time) listing items expiring within 2 days; can be switched off.
+6. Monthly summary of items used vs wasted.
 
 ## Tech stack
 
 | Layer | Technologies |
 | --- | --- |
 | Frontend | React, TypeScript, Vite, React Router, TanStack Query, React Hook Form, Zod, Tailwind CSS |
-| Backend | Java 17, Spring Boot 4, Spring Web, Spring Data JPA, Spring Security (JWT), Bean Validation, Flyway, Spring Cache + Caffeine, Actuator, Maven |
+| Backend | Java 17, Spring Boot 4, Spring Web, Spring Data JPA, Spring Security (JWT), Bean Validation, Flyway, Actuator, Maven |
 | Database | PostgreSQL |
-| External APIs | TheMealDB (recipes), Brevo (email) |
+| External APIs | Brevo (email) |
 | Testing | JUnit 5, Mockito, AssertJ, Testcontainers, Vitest, React Testing Library, Playwright |
 | DevOps | Git, GitHub, Docker, Docker Compose, GitHub Actions |
 | Hosting | Vercel (frontend), Render (backend), Neon (database) |

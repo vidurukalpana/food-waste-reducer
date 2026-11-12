@@ -41,8 +41,6 @@
   <text x="32" y="248" font-size="15" font-weight="bold" fill="#222222">Milk</text>
   <text x="32" y="268" font-size="12" fill="#666666">1 l · Expires 9 Nov 2026</text>
   <text x="32" y="294" font-size="13" font-weight="bold" fill="#a94442">Expired 1 day ago</text>
-  <rect x="232" y="278" width="100" height="24" rx="4" fill="#ffffff" stroke="#333333"/>
-  <text x="282" y="294" text-anchor="middle" font-size="12" fill="#222222">Recipe ideas</text>
 
   <!-- Card: urgent today -->
   <rect x="16" y="320" width="328" height="88" rx="6" fill="#ffffff" stroke="#999999"/>
@@ -50,8 +48,6 @@
   <text x="32" y="346" font-size="15" font-weight="bold" fill="#222222">Chicken breast</text>
   <text x="32" y="366" font-size="12" fill="#666666">500 g · Expires 10 Nov 2026</text>
   <text x="32" y="392" font-size="13" font-weight="bold" fill="#8a5a00">Expires today</text>
-  <rect x="232" y="376" width="100" height="24" rx="4" fill="#ffffff" stroke="#333333"/>
-  <text x="282" y="392" text-anchor="middle" font-size="12" fill="#222222">Recipe ideas</text>
 
   <!-- Card: urgent 2 days -->
   <rect x="16" y="418" width="328" height="88" rx="6" fill="#ffffff" stroke="#999999"/>
@@ -59,8 +55,6 @@
   <text x="32" y="444" font-size="15" font-weight="bold" fill="#222222">Yoghurt</text>
   <text x="32" y="464" font-size="12" fill="#666666">4 pcs · Expires 12 Nov 2026</text>
   <text x="32" y="490" font-size="13" font-weight="bold" fill="#8a5a00">2 days left</text>
-  <rect x="232" y="474" width="100" height="24" rx="4" fill="#ffffff" stroke="#333333"/>
-  <text x="282" y="490" text-anchor="middle" font-size="12" fill="#222222">Recipe ideas</text>
 
   <!-- Card: soon -->
   <rect x="16" y="516" width="328" height="88" rx="6" fill="#ffffff" stroke="#999999"/>

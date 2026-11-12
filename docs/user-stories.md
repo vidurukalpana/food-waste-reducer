@@ -8,9 +8,8 @@ All dates and times use Sri Lanka time (`Asia/Colombo`, UTC+05:30). "Today" mean
 | 2. Add, edit, delete items | US-03, US-04 |
 | 3. Use soon dashboard | US-05 |
 | 4. Mark used or wasted | US-06 |
-| 5. Recipe ideas | US-07 |
-| 6. Daily email reminder | US-08 |
-| 7. Monthly summary | US-09 |
+| 5. Daily email reminder | US-07 |
+| 6. Monthly summary | US-08 |
 
 ---
 
@@ -78,18 +77,7 @@ As a user, I want to mark an item as used or wasted, so that my list shows only 
 2. **Given** I have an active item, **when** I click **Wasted**, **then** it leaves my active list and is counted as wasted in this month's summary.
 3. **Given** an item is already marked used or wasted, **when** I try to mark it again, **then** I see "Item is already closed" and nothing changes.
 
-## US-07 Get recipe ideas
-
-As a user, I want recipe ideas for an expiring item, so that I can cook it before it goes bad.
-
-**Acceptance criteria**
-
-1. **Given** I have an item named "chicken", **when** I click **Recipe ideas**, **then** I see up to 6 recipes, each with a photo, name and link.
-2. **Given** I see a recipe, **when** I click its link, **then** the recipe opens in a new tab.
-3. **Given** I have an item with an unusual name, **when** I click **Recipe ideas**, **then** I see "No recipes found".
-4. **Given** an item is orange or red on the dashboard, **when** I look at its card, **then** it has a **Recipe ideas** button.
-
-## US-08 Receive a daily reminder email
+## US-07 Receive a daily reminder email
 
 As a user, I want an email each morning listing food about to expire, so that I remember to use it without opening the app.
 
@@ -100,7 +88,7 @@ As a user, I want an email each morning listing food about to expire, so that I 
 3. **Given** I already received today's email, **when** the reminder job runs again the same day, **then** I do not receive a second email.
 4. **Given** I switch off **Daily email reminder** in settings, **when** it is 7:00 AM, **then** I receive no email.
 
-## US-09 See a monthly summary
+## US-08 See a monthly summary
 
 As a user, I want to see how much food I used versus wasted each month, so that I can track my progress.
 

@@ -24,8 +24,6 @@ tags:
     description: Register, log in, current user
   - name: Items
     description: Food items, expiry tracking, used / wasted actions
-  - name: Recipes
-    description: Recipe ideas through TheMealDB
   - name: Summary
     description: Monthly used vs wasted counts
   - name: Settings
@@ -314,38 +312,6 @@ paths:
         "409":
           $ref: "#/components/responses/ItemAlreadyClosed"
 
-  /api/recipes:
-    get:
-      tags: [Recipes]
-      summary: Get recipe ideas for an ingredient
-      description: Calls TheMealDB from the backend; returns at most 6 recipes, cached for 1 day. An unknown ingredient returns an empty list.
-      operationId: listRecipes
-      parameters:
-        - name: ingredient
-          in: query
-          required: true
-          schema:
-            type: string
-            minLength: 2
-            maxLength: 40
-          example: chicken
-      responses:
-        "200":
-          description: Up to 6 recipes
-          content:
-            application/json:
-              schema:
-                type: array
-                maxItems: 6
-                items:
-                  $ref: "#/components/schemas/RecipeSummary"
-        "400":
-          $ref: "#/components/responses/ValidationError"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "503":
-          $ref: "#/components/responses/ExternalServiceUnavailable"
-
   /api/summary:
     get:
       tags: [Summary]
@@ -522,18 +488,6 @@ components:
             title: Conflict
             status: 409
             detail: Item is already closed
-    ExternalServiceUnavailable:
-      description: The external API failed or timed out
-      content:
-        application/problem+json:
-          schema:
-            $ref: "#/components/schemas/ProblemDetail"
-          example:
-            type: about:blank
-            title: Service Unavailable
-            status: 503
-            detail: External service is unavailable, try again later
-
   schemas:
     Health:
       type: object
@@ -675,25 +629,6 @@ components:
           format: date-time
           description: Set when the item is marked used or wasted
           example: null
-
-    RecipeSummary:
-      type: object
-      required: [id, name, thumbnailUrl, sourceUrl]
-      properties:
-        id:
-          type: string
-          example: "52795"
-        name:
-          type: string
-          example: Chicken Handi
-        thumbnailUrl:
-          type: string
-          format: uri
-          example: https://www.themealdb.com/images/media/meals/wyxwsp1486979827.jpg
-        sourceUrl:
-          type: string
-          format: uri
-          example: https://www.themealdb.com/meal/52795
 
     MonthlySummary:
       type: object
