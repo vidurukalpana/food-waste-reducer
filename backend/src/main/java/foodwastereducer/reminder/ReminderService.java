@@ -50,7 +50,8 @@ public class ReminderService {
 
   // At most one email per user per day. Each item is listed once only.
   // No surrounding transaction. Each user is handled on their own.
-  public ReminderRunResult sendDailyReminders() {
+  // synchronized: the scheduled job plus the HTTP trigger never overlap on one server.
+  public synchronized ReminderRunResult sendDailyReminders() {
     LocalDate today = LocalDate.now(clock);
     List<User> users = userRepository.findDueForReminder(today);
     int emailed = 0;
