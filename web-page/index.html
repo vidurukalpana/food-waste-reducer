@@ -42,6 +42,7 @@
         <div class="container hero-inner">
           <div class="hero-text">
             <h1>Food Waste Reducer</h1>
+            <p class="tagline">Fresh Meals with Less Waste</p>
             <p class="intro">
               A full-stack web application that helps households use food before it expires. Users
               record the food in their kitchen, see what to use first and track how much they use or
@@ -97,17 +98,23 @@
           </p>
 
           <div class="tabs" role="tablist" aria-label="App screens">
-            <button role="tab" id="tab-dashboard" aria-controls="panel-dashboard" aria-selected="true">Dashboard</button>
+            <button role="tab" id="tab-login" aria-controls="panel-login" aria-selected="true">Sign in</button>
+            <button role="tab" id="tab-dashboard" aria-controls="panel-dashboard" aria-selected="false">Dashboard</button>
             <button role="tab" id="tab-items" aria-controls="panel-items" aria-selected="false">Items</button>
             <button role="tab" id="tab-add-item" aria-controls="panel-add-item" aria-selected="false">Add item</button>
             <button role="tab" id="tab-summary" aria-controls="panel-summary" aria-selected="false">Summary</button>
             <button role="tab" id="tab-settings" aria-controls="panel-settings" aria-selected="false">Settings</button>
-            <button role="tab" id="tab-login" aria-controls="panel-login" aria-selected="false">Sign in</button>
           </div>
 
+          <div class="panel" role="tabpanel" id="panel-login" aria-labelledby="tab-login">
+            <figure class="screens">
+              <div class="browser"><img src="assets/screens/login-desktop.webp" alt="Sign in on desktop" width="2560" height="1600" /></div>
+              <div class="phone"><img src="assets/screens/login-phone.webp" alt="Sign in on mobile" width="780" height="1688" /></div>
+            </figure>
+          </div>
           <div class="panel" role="tabpanel" id="panel-dashboard" aria-labelledby="tab-dashboard">
             <figure class="screens">
-              <div class="browser"><img src="assets/screens/dashboard-desktop.webp" alt="Dashboard on desktop" width="2560" height="1600" /></div>
+              <div class="browser"><img src="assets/screens/dashboard-desktop.webp" alt="Dashboard on desktop" width="2560" height="1600" loading="lazy" /></div>
               <div class="phone"><img src="assets/screens/dashboard-phone.webp" alt="Dashboard on mobile" width="780" height="1688" loading="lazy" /></div>
             </figure>
           </div>
@@ -133,12 +140,6 @@
             <figure class="screens">
               <div class="browser"><img src="assets/screens/settings-desktop.webp" alt="Settings on desktop" width="2560" height="1600" loading="lazy" /></div>
               <div class="phone"><img src="assets/screens/settings-phone.webp" alt="Settings on mobile" width="780" height="1688" loading="lazy" /></div>
-            </figure>
-          </div>
-          <div class="panel" role="tabpanel" id="panel-login" aria-labelledby="tab-login">
-            <figure class="screens">
-              <div class="browser"><img src="assets/screens/login-desktop.webp" alt="Sign in on desktop" width="2560" height="1600" loading="lazy" /></div>
-              <div class="phone"><img src="assets/screens/login-phone.webp" alt="Sign in on mobile" width="780" height="1688" loading="lazy" /></div>
             </figure>
           </div>
         </div>
