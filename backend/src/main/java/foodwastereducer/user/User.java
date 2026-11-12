@@ -26,6 +26,9 @@ public class User {
   @Column(name = "created_at", nullable = false, updatable = false)
   private Instant createdAt;
 
+  @Column(name = "reminder_enabled", nullable = false)
+  private boolean reminderEnabled = true;
+
   protected User() {}
 
   public User(String email, String passwordHash, Instant createdAt) {
@@ -48,5 +51,13 @@ public class User {
 
   public Instant getCreatedAt() {
     return createdAt;
+  }
+
+  public boolean isReminderEnabled() {
+    return reminderEnabled;
+  }
+
+  public void changeReminderEnabled(boolean reminderEnabled) {
+    this.reminderEnabled = reminderEnabled;
   }
 }
