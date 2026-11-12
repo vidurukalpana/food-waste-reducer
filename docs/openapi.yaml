@@ -24,8 +24,6 @@ tags:
     description: Register, log in, current user
   - name: Items
     description: Food items, expiry tracking, used / wasted actions
-  - name: Products
-    description: Barcode lookup through Open Food Facts
   - name: Recipes
     description: Recipe ideas through TheMealDB
   - name: Summary
@@ -315,45 +313,6 @@ paths:
           $ref: "#/components/responses/ItemNotFound"
         "409":
           $ref: "#/components/responses/ItemAlreadyClosed"
-
-  /api/products/{barcode}:
-    get:
-      tags: [Products]
-      summary: Look up a product by barcode
-      description: Calls Open Food Facts from the backend; results are cached for 7 days.
-      operationId: getProduct
-      parameters:
-        - name: barcode
-          in: path
-          required: true
-          schema:
-            type: string
-            pattern: "^[0-9]{8,14}$"
-          example: "3017620422003"
-      responses:
-        "200":
-          description: Product found
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/ProductInfo"
-        "400":
-          $ref: "#/components/responses/ValidationError"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-        "404":
-          description: Product not found
-          content:
-            application/problem+json:
-              schema:
-                $ref: "#/components/schemas/ProblemDetail"
-              example:
-                type: about:blank
-                title: Not Found
-                status: 404
-                detail: Product not found
-        "503":
-          $ref: "#/components/responses/ExternalServiceUnavailable"
 
   /api/recipes:
     get:
@@ -671,10 +630,6 @@ components:
           type: string
           format: date
           example: "2026-11-12"
-        barcode:
-          type: [string, "null"]
-          pattern: "^[0-9]{8,14}$"
-          example: "3017620422003"
 
     ItemResponse:
       type: object
@@ -687,9 +642,6 @@ components:
         name:
           type: string
           example: Milk
-        barcode:
-          type: [string, "null"]
-          example: null
         category:
           $ref: "#/components/schemas/Category"
         quantity:
@@ -723,22 +675,6 @@ components:
           format: date-time
           description: Set when the item is marked used or wasted
           example: null
-
-    ProductInfo:
-      type: object
-      required: [name]
-      properties:
-        name:
-          type: string
-          example: Nutella
-        brand:
-          type: [string, "null"]
-          example: Ferrero
-        suggestedCategory:
-          oneOf:
-            - $ref: "#/components/schemas/Category"
-            - type: "null"
-          example: PANTRY
 
     RecipeSummary:
       type: object

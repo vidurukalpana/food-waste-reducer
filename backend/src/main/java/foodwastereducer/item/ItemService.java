@@ -56,7 +56,6 @@ public class ItemService {
         new Item(
             owner,
             request.name().strip(),
-            request.barcode(),
             request.category(),
             request.quantity(),
             request.unit().strip(),
@@ -70,7 +69,6 @@ public class ItemService {
     Item item = findOwnedItem(ownerId, itemId);
     item.update(
         request.name().strip(),
-        request.barcode(),
         request.category(),
         request.quantity(),
         request.unit().strip(),

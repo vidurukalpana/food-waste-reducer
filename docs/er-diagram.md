@@ -9,11 +9,10 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
 │ id                 uuid             PK     │─────┐    * │ id                 uuid             PK     │
 │ email              varchar(255)     UNIQUE │     └──────│ user_id            uuid             FK     │
 │ password_hash      varchar(100)            │            │ name               varchar(120)            │
-│ created_at         timestamptz             │            │ barcode            varchar(32) NULL        │
-│ reminder_enabled   boolean          V2     │            │ category           varchar(20)             │
-│ last_reminder_date date NULL        V2     │            │ quantity           numeric(10,2)           │
-└────────────────────────────────────────────┘            │ unit               varchar(20)             │
-                                                          │ expiry_date        date                    │
+│ created_at         timestamptz             │            │ category           varchar(20)             │
+│ reminder_enabled   boolean          V3     │            │ quantity           numeric(10,2)           │
+│ last_reminder_date date NULL        V3     │            │ unit               varchar(20)             │
+└────────────────────────────────────────────┘            │ expiry_date        date                    │
                                                           │ status             varchar(10)             │
                                                           │ created_at         timestamptz             │
                                                           │ updated_at         timestamptz             │
@@ -21,7 +20,7 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
                                                           └────────────────────────────────────────────┘
 ```
 
-**Legend:** `PK` primary key · `FK` foreign key · `UNIQUE` no duplicates · `NULL` value is optional (every other column is `NOT NULL`) · `V2` added by the V2 migration (step 9) · `1 ── *` one user owns many items
+**Legend:** `PK` primary key · `FK` foreign key · `UNIQUE` no duplicates · `NULL` value is optional (every other column is `NOT NULL`) · `V3` added by the V3 migration (step 8) · `1 ── *` one user owns many items
 
 ## users
 
@@ -31,8 +30,8 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
 | `email` | `varchar(255)` | Unique, stored in lowercase |
 | `password_hash` | `varchar(100)` | BCrypt hash, never the plain password |
 | `created_at` | `timestamptz` | When the account was created |
-| `reminder_enabled` | `boolean` | Default `true`; daily email on or off (V2) |
-| `last_reminder_date` | `date` NULL | Sri Lanka date of the last reminder email (V2) |
+| `reminder_enabled` | `boolean` | Default `true`; daily email on or off (V3) |
+| `last_reminder_date` | `date` NULL | Sri Lanka date of the last reminder email (V3) |
 
 ## items
 
@@ -41,7 +40,6 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
 | `id` | `uuid` | Primary key |
 | `user_id` | `uuid` | Foreign key → `users.id`, `ON DELETE CASCADE` |
 | `name` | `varchar(120)` | Product name |
-| `barcode` | `varchar(32)` NULL | Optional barcode |
 | `category` | `varchar(20)` | One of the categories below |
 | `quantity` | `numeric(10,2)` | Default `1`; must be greater than 0 (checked by the API) |
 | `unit` | `varchar(20)` | Default `'pcs'` |

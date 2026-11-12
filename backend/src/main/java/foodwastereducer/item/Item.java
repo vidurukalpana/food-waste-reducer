@@ -32,9 +32,6 @@ public class Item {
   @Column(nullable = false, length = 120)
   private String name;
 
-  @Column(length = 32)
-  private String barcode;
-
   @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 20)
   private Category category;
@@ -66,7 +63,6 @@ public class Item {
   public Item(
       User owner,
       String name,
-      String barcode,
       Category category,
       BigDecimal quantity,
       String unit,
@@ -74,7 +70,6 @@ public class Item {
       Instant createdAt) {
     this.owner = owner;
     this.name = name;
-    this.barcode = barcode;
     this.category = category;
     this.quantity = quantity;
     this.unit = unit;
@@ -86,14 +81,12 @@ public class Item {
 
   public void update(
       String name,
-      String barcode,
       Category category,
       BigDecimal quantity,
       String unit,
       LocalDate expiryDate,
       Instant updatedAt) {
     this.name = name;
-    this.barcode = barcode;
     this.category = category;
     this.quantity = quantity;
     this.unit = unit;
@@ -122,10 +115,6 @@ public class Item {
 
   public String getName() {
     return name;
-  }
-
-  public String getBarcode() {
-    return barcode;
   }
 
   public Category getCategory() {

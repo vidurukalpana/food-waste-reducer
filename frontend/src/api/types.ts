@@ -27,7 +27,6 @@ export type ExpiryStatus = 'EXPIRED' | 'URGENT' | 'SOON' | 'FRESH'
 export type ItemResponse = {
   id: string
   name: string
-  barcode: string | null
   category: Category
   quantity: number
   unit: string
@@ -48,7 +47,6 @@ export type ItemRequest = {
   quantity: number
   unit: string
   expiryDate: string
-  barcode: string | null
 }
 
 export type ProblemDetail = {
