@@ -16,6 +16,8 @@
 	<properties>
 		<java.version>17</java.version>
 		<spotless.version>3.11.0</spotless.version>
+		<!-- Profile for ./mvnw spring-boot:run. Override with -Dspring-boot.run.profiles=prod. -->
+		<spring-boot.run.profiles>dev</spring-boot.run.profiles>
 	</properties>
 	<dependencies>
 		<dependency>
