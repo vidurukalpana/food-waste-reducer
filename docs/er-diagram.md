@@ -17,10 +17,11 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
                                                           │ created_at         timestamptz             │
                                                           │ updated_at         timestamptz             │
                                                           │ closed_at          timestamptz NULL        │
+                                                          │ reminded_on        date NULL        V4     │
                                                           └────────────────────────────────────────────┘
 ```
 
-**Legend:** `PK` primary key · `FK` foreign key · `UNIQUE` no duplicates · `NULL` value is optional (every other column is `NOT NULL`) · `V3` added by the V3 migration (step 7) · `1 ── *` one user owns many items
+**Legend:** `PK` primary key · `FK` foreign key · `UNIQUE` no duplicates · `NULL` value is optional (every other column is `NOT NULL`) · `V3` / `V4` added by the V3 / V4 migrations (step 7) · `1 ── *` one user owns many items
 
 ## users
 
@@ -30,7 +31,7 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
 | `email` | `varchar(255)` | Unique, stored in lowercase |
 | `password_hash` | `varchar(100)` | BCrypt hash, never the plain password |
 | `created_at` | `timestamptz` | When the account was created |
-| `reminder_enabled` | `boolean` | Default `true`; daily email on or off (V3) |
+| `reminder_enabled` | `boolean` | Default `false` (V5); daily email on or off (V3) |
 | `last_reminder_date` | `date` NULL | Sri Lanka date of the last reminder email (V3) |
 
 ## items
@@ -48,6 +49,7 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
 | `created_at` | `timestamptz` | When the item was added |
 | `updated_at` | `timestamptz` | When the item was last changed |
 | `closed_at` | `timestamptz` NULL | When the item was marked used or wasted |
+| `reminded_on` | `date` NULL | Sri Lanka date of the reminder email that listed this item; cleared when the expiry date changes (V4) |
 
 ## Allowed values
 

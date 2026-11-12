@@ -7,6 +7,7 @@ import { ItemsPage } from './pages/ItemsPage'
 import { LoginPage } from './pages/LoginPage'
 import { NewItemPage } from './pages/NewItemPage'
 import { RegisterPage } from './pages/RegisterPage'
+import { SettingsPage } from './pages/SettingsPage'
 import { SummaryPage } from './pages/SummaryPage'
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/items/new" element={<NewItemPage />} />
           <Route path="/items/:id" element={<ItemDetailPage />} />
           <Route path="/summary" element={<SummaryPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
       </Route>
       <Route path="*" element={<Navigate to="/dashboard" replace />} />

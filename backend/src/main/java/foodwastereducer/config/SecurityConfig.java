@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/auth/register", "/api/auth/login")
                 .permitAll()
-                // Protected by the X-Cron-Secret header in step 9.
+                // Protected by the X-Cron-Secret header in ReminderController.
                 .requestMatchers("/api/internal/**")
                 .permitAll()
                 .anyRequest()

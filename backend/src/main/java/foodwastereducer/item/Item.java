@@ -58,6 +58,10 @@ public class Item {
   @Column(name = "closed_at")
   private Instant closedAt;
 
+  // Date of the reminder email that listed this item. Null until then.
+  @Column(name = "reminded_on")
+  private LocalDate remindedOn;
+
   protected Item() {}
 
   public Item(
@@ -90,6 +94,10 @@ public class Item {
     this.category = category;
     this.quantity = quantity;
     this.unit = unit;
+    // A new expiry date makes the item eligible for one more reminder.
+    if (!expiryDate.equals(this.expiryDate)) {
+      this.remindedOn = null;
+    }
     this.expiryDate = expiryDate;
     this.updatedAt = updatedAt;
   }

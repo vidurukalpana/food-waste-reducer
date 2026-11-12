@@ -381,7 +381,8 @@ paths:
       summary: Send today's reminder emails
       description: |
         Called daily at 07:00 Sri Lanka time by GitHub Actions. Emails each user with reminders on who has active items
-        expiring within 2 days (including expired ones) and has not been emailed today. Safe to call more than once a day.
+        expiring within 2 days (including expired ones) that no earlier email listed. Each user gets at most one email per day.
+        Safe to call more than once a day.
       operationId: runReminders
       security:
         - cronSecret: []
