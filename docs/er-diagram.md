@@ -31,7 +31,7 @@ Food Waste Reducer stores data in two PostgreSQL tables. One user owns many item
 | `email` | `varchar(255)` | Unique, stored in lowercase |
 | `password_hash` | `varchar(100)` | BCrypt hash, never the plain password |
 | `created_at` | `timestamptz` | When the account was created |
-| `reminder_enabled` | `boolean` | Default `true`; daily email on or off (V3) |
+| `reminder_enabled` | `boolean` | Default `false` (V5); daily email on or off (V3) |
 | `last_reminder_date` | `date` NULL | Sri Lanka date of the last reminder email (V3) |
 
 ## items

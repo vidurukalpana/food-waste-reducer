@@ -89,6 +89,7 @@ As a user, I want an email when food is about to expire, so that I remember to u
 4. **Given** I have no new items expiring within 2 days, **when** it is 7:00 AM, **then** I receive no email.
 5. **Given** I already received today's email, **when** the reminder job runs again the same day, **then** I do not receive a second email.
 6. **Given** I switch off **Daily email reminder** in settings, **when** it is 7:00 AM, **then** I receive no email.
+7. **Given** I just registered, **when** I open settings, **then** **Daily email reminder** is off until I switch it on.
 
 ## US-08 See a monthly summary
 

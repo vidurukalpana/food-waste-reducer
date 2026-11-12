@@ -1,7 +1,7 @@
 import { Link, NavLink, Outlet, useNavigate } from 'react-router'
 import { useAuth } from '../auth/useAuth'
 import { Brand } from './Brand'
-import { ChartIcon, DashboardIcon, ListIcon, LogOutIcon } from './icons'
+import { ChartIcon, DashboardIcon, ListIcon, LogOutIcon, SettingsIcon } from './icons'
 
 const navLinks = [
   { to: '/dashboard', label: 'Dashboard', Icon: DashboardIcon },
@@ -43,6 +43,18 @@ function Header() {
 
         <div className="flex items-center gap-3 text-sm">
           {user && <span className="hidden text-white/70 md:inline">{user.email}</span>}
+          <NavLink
+            to="/settings"
+            aria-label="Settings"
+            title="Settings"
+            className={({ isActive }) =>
+              `grid size-9 place-items-center rounded-full transition ${
+                isActive ? 'bg-sun text-forest' : 'text-white/80 hover:bg-white/10 hover:text-white'
+              }`
+            }
+          >
+            <SettingsIcon className="size-5" />
+          </NavLink>
           <button
             type="button"
             onClick={handleLogout}

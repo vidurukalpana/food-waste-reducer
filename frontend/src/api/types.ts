@@ -49,6 +49,10 @@ export type ItemRequest = {
   expiryDate: string
 }
 
+export type UserSettings = {
+  reminderEnabled: boolean
+}
+
 export type ProblemDetail = {
   type?: string
   title: string

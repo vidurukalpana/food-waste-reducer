@@ -27,8 +27,9 @@ public class User {
   @Column(name = "created_at", nullable = false, updatable = false)
   private Instant createdAt;
 
+  // Off until the user turns it on in Settings.
   @Column(name = "reminder_enabled", nullable = false)
-  private boolean reminderEnabled = true;
+  private boolean reminderEnabled = false;
 
   // Written by UserRepository.markReminded. Read by its reminder query.
   @Column(name = "last_reminder_date")
