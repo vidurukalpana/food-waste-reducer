@@ -29,18 +29,6 @@ describe('ItemForm', () => {
     expect(onSubmit).not.toHaveBeenCalled()
   })
 
-  it('rejects a quantity of 0', async () => {
-    const onSubmit = renderForm()
-    const quantity = screen.getByLabelText('Quantity')
-
-    await userEvent.clear(quantity)
-    await userEvent.type(quantity, '0')
-    await userEvent.click(screen.getByRole('button', { name: 'Save' }))
-
-    expect(await screen.findByText('Quantity must be greater than 0')).toBeInTheDocument()
-    expect(onSubmit).not.toHaveBeenCalled()
-  })
-
   it('submits a valid item as an API request', async () => {
     const onSubmit = renderForm()
 

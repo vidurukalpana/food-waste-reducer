@@ -9,9 +9,8 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
-// Full app on a Testcontainers database. The dev profile logs emails instead of sending them.
-// Secrets are test values. The tests do not need a .env file.
-// One shared setup lets every integration test reuse the same app context plus container.
+// Full app on a Testcontainers database. Dev profile: emails are logged, not sent.
+// Test values replace the .env secrets.
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @SpringBootTest(

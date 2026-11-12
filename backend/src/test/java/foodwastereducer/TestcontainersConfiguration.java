@@ -5,7 +5,7 @@ import org.springframework.boot.testcontainers.service.connection.ServiceConnect
 import org.springframework.context.annotation.Bean;
 import org.testcontainers.postgresql.PostgreSQLContainer;
 
-// One throwaway PostgreSQL per test run. Same major version as docker-compose.yml.
+// PostgreSQL container per test run. Same major version as docker-compose.yml.
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
 

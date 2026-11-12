@@ -7,7 +7,7 @@ import { AuthProvider } from './AuthProvider'
 import { ProtectedRoute } from './ProtectedRoute'
 import { tokenStorage } from './tokenStorage'
 
-// Only apiFetch is replaced. ApiError stays real.
+// Mocks apiFetch only. ApiError keeps its real class.
 vi.mock('../api/client', async (importOriginal) => ({
   ...(await importOriginal<typeof import('../api/client')>()),
   apiFetch: vi.fn(),

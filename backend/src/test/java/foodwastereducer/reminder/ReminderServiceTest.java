@@ -34,8 +34,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.support.TransactionTemplate;
 
-// Service logic only. The due-user filter plus the once-per-item filter are SQL queries.
-// Those are covered by the integration tests.
+// The SQL filters are covered by ReminderQueryIntegrationTest.
 @ExtendWith(MockitoExtension.class)
 class ReminderServiceTest {
 
@@ -113,7 +112,6 @@ class ReminderServiceTest {
     ReminderRunResult result = reminderService.sendDailyReminders();
 
     verify(emailSender).send(eq("bob@example.com"), anyString(), contains("Bread"));
-    // Alice stays unmarked. Her items go out on the next run.
     verify(itemRepository, never()).markReminded(List.of(aliceMilk.getId()), TODAY);
     verify(userRepository, never()).markReminded(alice.getId(), TODAY);
     verify(userRepository).markReminded(bob.getId(), TODAY);

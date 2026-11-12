@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.support.TransactionTemplate;
 
-// The two SQL filters behind the daily reminder.
 @IntegrationTest
 class ReminderQueryIntegrationTest {
 
